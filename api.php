@@ -45,7 +45,24 @@ switch ($function_name) {
         echo "SUCCESS";
         break;
     case 'load_podcast':
+        $offset = intval($_GET['offset']); // Ensure offset is an integer
+        if(isset($_GET['category_id']) && $_GET['category_id'] != NULL){
+            $category_id = $_GET['category_id'];
+            $stmt = $conn->prepare("SELECT * FROM pulse.podcast AS A WHERE A.parent_id <> 0 AND FIND_IN_SET(?, A.cat_id)LIMIT 9 OFFSET ?");
+            $stmt->bind_param('i', $offset);
+        }else{
+            $stmt = $conn->prepare("SELECT * FROM pulse.podcast WHERE parent_id <> 0  LIMIT 9 OFFSET ?");
+            $stmt->bind_param('i', $offset);
+        }
+
+        $stmt->execute();
         
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        
+        echo json_encode($data);
+
+        break;
     default:
         # code...
         break;
