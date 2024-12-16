@@ -202,9 +202,9 @@ function loadPodcast() {
                 container.append(itemHtml(item));
             })
 
-            offset += 9;
+            offset += 8;
 
-            if (items.length < 9) {
+            if (items.length < 8) {
                 $('#load_more_button').hide();
             } else {
                 $('#load_more_button').show();
