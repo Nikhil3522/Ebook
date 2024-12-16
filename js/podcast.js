@@ -11,6 +11,8 @@ const songThumbnailDisplay = document.getElementById('footer-song-thumbanil');
 var songs = [];
 var currentSongIndex = parseInt(localStorage.getItem('footer_currentSongIndex')) || 0;
 var savedTimes = JSON.parse(localStorage.getItem('footer_savedTimes')) || {};
+const url = window.location.href;
+const params = new URLSearchParams(new URL(url).search);
 
 // Function to load the song at the given index
 function loadSong(index) {
@@ -174,6 +176,7 @@ function createItemHtml_grid(item) {
 function loadPodcast() {
     // $('#loading').show();
     handleLoading(true);
+    let category_id_parm = params.get('category_id');
 
     $.ajax({
         url: 'api.php',
@@ -181,7 +184,7 @@ function loadPodcast() {
         data: {
             offset: offset,
             function_name: 'load_podcast',
-            category_id: null
+            category_id: category_id_parm ? category_id_parm : null
         },
         success: function (data) {
 
