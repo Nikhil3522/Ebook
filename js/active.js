@@ -667,3 +667,25 @@ function handleLoading(type){
       $('#load_more_loading').hide();
   }
 }
+
+function languageSort(e){
+  const activeTab = $('.nav-link.active');
+
+  if (activeTab.attr('href') === "#nav-list") {
+
+    $('#ebook_row_container_list').children().slideUp(500, function() {
+      $(this).remove();
+    });
+
+  }else if (activeTab.attr('href') === "#nav-grid"){
+
+    $('#ebook_row_container').children().slideUp(500, function() {
+      $(this).remove();
+    });
+
+  }
+
+  offset = 0;
+  language = e.target.value
+  loadMoreData();
+}

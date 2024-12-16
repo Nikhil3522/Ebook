@@ -79,6 +79,7 @@ const categoryId = params.get('category_id');
 
 let offset = 0;
 let loading = false;
+var language = "All";
 
 function loadMoreData(category_id_parm = null) {
 
@@ -99,7 +100,8 @@ function loadMoreData(category_id_parm = null) {
         data: { 
             offset: offset,
             function_name: 'load_ebook',
-            category_id : category_id
+            category_id : category_id,
+            language: language
         },
         success: function (data) {
 
@@ -135,8 +137,12 @@ function loadMoreData(category_id_parm = null) {
             
 
             items.forEach((item) => {
-                container.append(itemHtml(item));
-            })
+                const itemElement = $(itemHtml(item)); // Create the item element
+                container.append(itemElement); // Append the item to the container
+            
+                // Animate the item with slideDown after it is appended
+                itemElement.hide().slideDown(500); // Initially hide the element, then slide it down over 500ms
+            });
 
             if(typeof(category_id_parm) !== "number"){
                 offset += 9;

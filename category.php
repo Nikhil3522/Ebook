@@ -95,16 +95,29 @@
                                     <a class="nav-item nav-link active" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
                                     <a class="nav-item nav-link" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
                                 </div>
-                                <!-- <p>Showing 1–12 of 40 results</p> -->
-                                <div class="orderby__wrapper">
-                                    <span>Sort By</span>
-                                    <select class="shot__byselect" onchange="shuffleDivs('ebook_row_container')">
-                                        <option disabled>Select</option>
-                                        <option>Recommended</option>
-                                        <option>What's New</option>
-                                        <option>Popularity</option>
-                                        <option>Readers Rating</option>
-                                    </select>
+
+                                <div class="d-flex" style="column-gap: 20px;">
+                                    <div class="orderby__wrapper">
+                                        <span>Language</span>
+                                        <select class="shot__byselect" onchange="languageSort(event)">
+                                            <option value="All">All</option>
+                                            <option value="English">English</option>
+                                            <option value="Dari">Dari</option>
+                                            <option value="Pashto">Pashto</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- <p>Showing 1–12 of 40 results</p> -->
+                                    <div class="orderby__wrapper">
+                                        <span>Sort By</span>
+                                        <select class="shot__byselect" onchange="shuffleDivs('ebook_row_container')">
+                                            <option disabled>Select</option>
+                                            <option>Recommended</option>
+                                            <option>What's New</option>
+                                            <option>Popularity</option>
+                                            <option>Readers Rating</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
