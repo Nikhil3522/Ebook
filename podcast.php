@@ -280,8 +280,10 @@
                         <div class="col-lg-12">
                             <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
                                 <div class="shop__list nav justify-content-center" role="tablist">
-                                    <a class="nav-item nav-link active" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
-                                    <a class="nav-item nav-link" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+                                git config user.name
+git config user.email
+                                    <!-- <a class="nav-item nav-link active" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a> -->
+                                    <!-- <a class="nav-item nav-link" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a> -->
                                 </div>
                                 <!-- <p>Showing 1–12 of 40 results</p> -->
                                 <div class="orderby__wrapper">
@@ -423,7 +425,7 @@
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/active.js"></script>
-<script src="js/script.js"></script>
+<script src="js/podcast.js"></script>
 <script>
     
 document.addEventListener('DOMContentLoaded', function() {
