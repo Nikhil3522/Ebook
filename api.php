@@ -48,10 +48,41 @@ switch ($function_name) {
         $offset = intval($_GET['offset']); // Ensure offset is an integer
         if(isset($_GET['category_id']) && $_GET['category_id'] != NULL){
             $category_id = $_GET['category_id'];
-            $stmt = $conn->prepare("SELECT * FROM pulse.podcast AS A WHERE A.parent_id <> 0 AND FIND_IN_SET(?, A.cat_id)LIMIT 9 OFFSET ?");
-            $stmt->bind_param('i', $offset);
+
+            $query = "SELECT 
+                        A.id, 
+                        A.title, 
+                        A.description, 
+                        A.thumbnail, 
+                        B.audio_url
+                    FROM 
+                        pulse.podcast AS A
+                    LEFT JOIN 
+                        pulse.podcast AS B 
+                    ON 
+                        B.parent_id = A.id AND B.season = 1 AND B.episode = 1
+                    WHERE 
+                        A.parent_id = 0 AND A.active = 1 AND FIND_IN_SET(?, A.cat_id)
+                    LIMIT 9 OFFSET ?;";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ii', $category_id, $offset);
         }else{
-            $stmt = $conn->prepare("SELECT * FROM pulse.podcast WHERE parent_id <> 0  LIMIT 9 OFFSET ?");
+            $query = "SELECT 
+                        A.id, 
+                        A.title, 
+                        A.description, 
+                        A.thumbnail, 
+                        B.audio_url
+                    FROM 
+                        pulse.podcast AS A
+                    LEFT JOIN 
+                        pulse.podcast AS B 
+                    ON 
+                        B.parent_id = A.id AND B.season = 1 AND B.episode = 1
+                    WHERE 
+                        A.parent_id = 0 AND A.active = 1
+                    LIMIT 9 OFFSET ?;";
+            $stmt = $conn->prepare($query);
             $stmt->bind_param('i', $offset);
         }
 
