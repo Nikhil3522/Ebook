@@ -9,12 +9,21 @@ $user_id = 1;
 switch ($function_name) {
     case 'load_ebook':
         $offset = intval($_GET['offset']); // Ensure offset is an integer
+        $language = $_GET['language'];
+        $language_condition = "";
+
+        if(isset($_GET['language']) && $_GET['language'] != NULL && $_GET['language'] != "All"){
+            $language_input = $_GET['language'];
+            $language_condition = "ebook.lang = '$language_input' AND";
+        }
+
+
         if(isset($_GET['category_id']) && $_GET['category_id'] != NULL){
             $category_id = $_GET['category_id'];
-            $stmt = $conn->prepare("SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE ebook.active = 1 AND FIND_IN_SET(?, ebook.cat_id) LIMIT 9 OFFSET ?");
+            $stmt = $conn->prepare("SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE $language_condition ebook.active = 1 AND FIND_IN_SET(?, ebook.cat_id) LIMIT 9 OFFSET ?");
             $stmt->bind_param('ii', $category_id, $offset);
         }else{
-            $stmt = $conn->prepare("SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE ebook.active = 1 LIMIT 9 OFFSET ?");
+            $stmt = $conn->prepare("SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE $language_condition ebook.active = 1 LIMIT 9 OFFSET ?");
             $stmt->bind_param('i', $offset);
         }
 
