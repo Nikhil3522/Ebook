@@ -657,3 +657,13 @@ function shuffleDivs(idValue = "sort-parentDiv") {
   // Append the shuffled divs back to the parent div
   children.forEach(child => parent.appendChild(child));
 }
+
+function handleLoading(type){
+  if(type){
+      $('#load_more_text').hide();
+      $('#load_more_loading').show();
+  }else{
+      $('#load_more_text').show();
+      $('#load_more_loading').hide();
+  }
+}

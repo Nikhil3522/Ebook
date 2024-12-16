@@ -69,16 +69,6 @@ function createItemHTML_list(item){
             </div>`;
 }
 
-function handleLoading(type){
-    if(type){
-        $('#load_more_text').hide();
-        $('#load_more_loading').show();
-    }else{
-        $('#load_more_text').show();
-        $('#load_more_loading').hide();
-    }
-}
-
 $('#load_more_button').hide();
 const url = window.location.href;
 // Create a URLSearchParams object
@@ -186,9 +176,6 @@ loadMoreData();
 
 $('#load_more_button').on('click', loadMoreData);
 
-function lazyloading(){
-
-}
 
 var homeCategoryId = null;
 
