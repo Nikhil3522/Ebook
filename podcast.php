@@ -275,8 +275,8 @@
     <div class="page-shop-sidebar left--sidebar bg--white pb-4" style="border-bottom: 1px solid gray; display: flex; justify-content: center;">
         <div class="container" style="margin-top: 60px;">
             <div class="row">
-                
-                <div class="col-lg-12 col-12 order-1 order-lg-2">
+                <?php include('side_podcast_category.php') ?>
+                <div class="col-lg-9 col-12 order-1 order-lg-2">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">

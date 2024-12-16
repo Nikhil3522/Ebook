@@ -1,17 +1,5 @@
 <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
     <div class="shop__sidebar">
-        <!-- Start Single Widget -->
-        <aside class="widget search_widget">
-            <h3 class="widget__title">Search</h3>
-            <form mrthod="GET" action="search.php">
-                <div class="form-input" style="display: flex;margin-bottom: 20px;border: 1px solid #c6c6c6;justify-content: space-between;padding: 0px 5px;">
-                    <input type="text" placeholder="Search..." name="search_key" style="height: 30px;border: navajowhite;width: 100%;" required>
-                    <button style="border: none;background: none;">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </form>
-        </aside>
         <!-- End Single Widget -->
         <aside class="widget__categories products--cat" style="margin-top: 40px;">
             <h3 class="widget__title">Book Categories</h3>

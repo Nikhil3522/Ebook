@@ -127,22 +127,6 @@
                                         </div>
                                         <?php } ?>
                                     </div>
-                                    <div class="product_meta">
-											<span class="posted_in">Categories:
-                                                <?php
-                                                
-                                                    $query = "SELECT * FROM categories WHERE id IN ($cat_id)";
-                                                    $category_result = $conn->query($query);
-                                                    while($cat_row = $category_result->fetch_assoc()){
-                                                        $cat_id = $cat_row['id'];
-                                                        $cat_title = $cat_row['category'];
-                                                ?>
-                                                    <a href="index.php?category_id=<?php echo $cat_id; ?>"><?php echo $cat_title; ?></a>,
-                                                <?php
-                                                    }
-                                                ?>
-											</span>
-                                    </div>
                                     <div class="product-share">
                                         <ul>
                                             <li class="categories-title">Share :</li>

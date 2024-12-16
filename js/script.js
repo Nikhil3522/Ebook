@@ -60,7 +60,7 @@ function createItemHTML_list(item){
                         <li><i class="fa fa-star-o"></i></li>
                         <li><i class="fa fa-star-o"></i></li>
                     </ul>
-                    <p>${item.description}</p>
+                    <p style="text-align: justify;">${item.description}</p>
                     <ul class="cart__action d-flex">
                         <li class="cart"><a href="${bookReadLink}">Read Now</a></li>
                         ${ !item.book_id ? `<li class="wishlist"><a onclick="addFavourite(event, ${item.id})"></a></li>` : `` }
