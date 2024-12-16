@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../src/css/flipbook.css" />
+        <script src="../src/js/flipbook.js"></script>
+        <script type="text/javascript">
+            // console.log("fsad");
+            document.addEventListener('DOMContentLoaded', function () {
+                var container = document.getElementById('container');
+                var options = {
+                    pages: [],
+                    skin: 'dark',
+                };
+
+                const pages = [];
+                const urlParams = new URLSearchParams(window.location.search);
+
+                // Get a parameter by its name
+                const bookTitle = urlParams.get('id'); // "John"
+                const totalPage = urlParams.get('total_page');   // "30"
+                const folderName = bookTitle.replace(/ /g, "");
+                // console.log(name, age);
+                const baseUrl = `https://roshan1.b-cdn.net/ebook/${bookTitle}/${folderName}_page-`;
+
+                // console.log("baseUrl", baseUrl);
+                // console.log("folderName", folderName);
+
+                for (let i = 1; i <= totalPage; i++) {
+                    let pageType = '';
+                    if (i === 1) {
+                        pageType = 'Cover';
+                    } else if (i === 2) {
+                        pageType = 'Content';
+                    } else {
+                        pageType = `Page no. ${i}`;
+                    }
+
+                    options.pages.push({
+                        src: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                        thumb: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                        title: pageType,
+                    });
+
+                    // console.log({
+                    //     src: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                    //     thumb: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                    //     title: pageType,
+                    // })
+                }
+
+        
+                var flipbook = new FlipBook(container, options);
+        
+                // // Add new pages after 3 seconds
+                // setTimeout(function () {
+                //     var newPages = [
+                //         {
+                //             src: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0004.jpg',
+                //             thumb: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0004.jpg',
+                //             title: 'Chapter 1',
+                //         },
+                //         {
+                //             src: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0005.jpg',
+                //             thumb: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0005.jpg',
+                //             title: 'Chapter 2',
+                //         }
+                //     ];
+
+                //     // Update options with new pages
+                //     options.pages.push(...newPages);
+
+                //     // Clear the container and reinitialize the FlipBook
+                //     container.innerHTML = ''; // Clear previous flipbook content
+                //     flipbook = new FlipBook(container, options); // Reinitialize with updated options
+                // }, 3000);
+
+            });
+        </script>
+        
+    </head>
+
+    <body>
+        <button style="position: absolute; z-index: 10; right: 10px; background: transparent; border: none; color: white; font-weight: bold; padding: 10px; cursor: pointer;" onclick="window.location.href='../../index.php'">
+            Close
+        </button>
+        <div id="container"></div>
+    </body>
+</html>
