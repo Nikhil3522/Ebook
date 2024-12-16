@@ -205,7 +205,7 @@ function loadPodcast() {
                 container.append(itemHtml(item));
             })
 
-            offset += 8;
+            offset += 9;
 
             if (items.length < 8) {
                 $('#load_more_button').hide();

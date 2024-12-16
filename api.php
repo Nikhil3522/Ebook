@@ -90,7 +90,7 @@ switch ($function_name) {
                         B.parent_id = A.id AND B.season = 1 AND B.episode = 1
                     WHERE 
                         A.parent_id = 0 AND A.active = 1
-                    LIMIT 8 OFFSET ?;";
+                    LIMIT 9 OFFSET ?;";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('i', $offset);
         }
