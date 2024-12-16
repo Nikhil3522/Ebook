@@ -61,6 +61,7 @@
     bottom: 0;
     background: #363c43;
     padding: 10px 10px 0px 10px;
+    display: none;
 }
 #footer-music-player .player-container {
     /* max-width: 800px; */
@@ -144,7 +145,7 @@
 #footer-music-player .time-display {
     font-size: 0.9rem;
     margin-left: 10px;
-    width: 75px; /* Adjust this value as needed */
+    min-width: 75px; /* Adjust this value as needed */
     text-align: right;
     opacity:0.8;
 }
@@ -238,8 +239,8 @@
     <div id="footer-music-player">
         <div class="player-container">
             <div class="controls-and-info">
-                <div class="song-info" style="min-width: 250px; max-width: 250px;">
-                    <img src="https://roshan1.b-cdn.net/ebook/OliverTwist_02.png" style="margin: -3px; height: 45px;"/>
+                <div class="song-info" style="min-width: 250px; max-width: 250px; height: 39px; overflow: hidden;">
+                    <img id="footer-song-thumbanil" src="https://roshan1.b-cdn.net/ebook/OliverTwist_02.png" style="margin: -3px; height: 45px;"/>
                     <span id="footer-song-title">Song Title</span>
                     <span id="footer-artist-name">JENNIFER GIVENS</span>
                 </div>
@@ -271,17 +272,15 @@
         </audio>
     </div>
     <!-- Start Shop Page -->
-    <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg" style="border-bottom: 1px solid gray; display: flex; justify-content: center;">
+    <div class="page-shop-sidebar left--sidebar bg--white pb-4" style="border-bottom: 1px solid gray; display: flex; justify-content: center;">
         <div class="container" style="margin-top: 60px;">
             <div class="row">
-                <?php include('side_book_category.php') ?>
-                <div class="col-lg-9 col-12 order-1 order-lg-2">
+                
+                <div class="col-lg-12 col-12 order-1 order-lg-2">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
                                 <div class="shop__list nav justify-content-center" role="tablist">
-                                git config user.name
-git config user.email
                                     <!-- <a class="nav-item nav-link active" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a> -->
                                     <!-- <a class="nav-item nav-link" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a> -->
                                 </div>
@@ -426,134 +425,6 @@ git config user.email
 <script src="js/plugins.js"></script>
 <script src="js/active.js"></script>
 <script src="js/podcast.js"></script>
-<script>
-    
-document.addEventListener('DOMContentLoaded', function() {
-    const audioPlayer = document.getElementById('footer-audio-player');
-    const playPauseButton = document.getElementById('footer-play-pause-button');
-    const prevButton = document.getElementById('footer-prev-button');
-    const nextButton = document.getElementById('footer-next-button');
-    const progress = document.getElementById('footer-progress');
-    const progressBar = document.getElementById('footer-progress-bar');
-    const currentTimeDisplay = document.getElementById('footer-current-time');
-    const totalTimeDisplay = document.getElementById('footer-total-time');
-    const songTitleDisplay = document.getElementById('footer-song-title');
-
-    const songs = [
-        { title: "Deep In Carolina", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "Catchin' Catfish", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "Dangerous Game", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "Make Up Your Mind", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "The Other Side", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "Sweet Rendezvous", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "Play Me Down", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "Here With Me", url: "http://51.68.207.190/roshanebook/sample.mp3" },
-        { title: "Whiskey Rum & Rye", url: "http://51.68.207.190/roshanebook/sample.mp3" }
-    ];
-
-   let currentSongIndex = parseInt(localStorage.getItem('footer_currentSongIndex')) || 0;
-    let savedTimes = JSON.parse(localStorage.getItem('footer_savedTimes')) || {};
-
-    function loadSong(index) {
-        currentSongIndex = index;
-        audioPlayer.src = songs[index].url;
-        songTitleDisplay.textContent = songs[index].title;
-        audioPlayer.currentTime = savedTimes[index] || 0;
-        localStorage.setItem('footer_currentSongIndex', index);
-        updatePlayPauseButton();
-    }
-    
-     function updateProgress() {
-        const value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-        progress.style.width = value + '%';
-        currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
-        
-        // Only save time if it's more than 5 seconds into the song
-        if (audioPlayer.currentTime > 5) {
-            savedTimes[currentSongIndex] = audioPlayer.currentTime;
-            localStorage.setItem('footer_savedTimes', JSON.stringify(savedTimes));
-        }
-    }
-
-    function playSong() {
-        window.dispatchEvent(new CustomEvent('music-play-started', { detail: { playerId: 'footer-audio-player' } }));
-        audioPlayer.play();
-        updatePlayPauseButton();
-    }
-
-    function pauseSong() {
-        audioPlayer.pause();
-        updatePlayPauseButton();
-    }
-
-    function updatePlayPauseButton() {
-        playPauseButton.innerHTML = audioPlayer.paused 
-            ? '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
-            : '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
-    }
-
-    function togglePlayPause() {
-        if (audioPlayer.paused) {
-            playSong();
-        } else {
-            pauseSong();
-        }
-    }
-
-    function playPrevious() {
-        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-        loadSong(currentSongIndex);
-        playSong();
-    }
-
-    function playNext() {
-        currentSongIndex = (currentSongIndex + 1) % songs.length;
-        loadSong(currentSongIndex);
-        playSong();
-    }
-
-
-    function setTotalTime() {
-        totalTimeDisplay.textContent = formatTime(audioPlayer.duration);
-    }
-
-    function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = Math.floor(seconds % 60);
-        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-    }
-
-    function seek(event) {
-        const percent = event.offsetX / progressBar.offsetWidth;
-        audioPlayer.currentTime = percent * audioPlayer.duration;
-        updateProgress();
-    }
-
-    playPauseButton.addEventListener('click', togglePlayPause);
-    prevButton.addEventListener('click', playPrevious);
-    nextButton.addEventListener('click', playNext);
-    audioPlayer.addEventListener('timeupdate', updateProgress);
-    audioPlayer.addEventListener('loadedmetadata', setTotalTime);
-    audioPlayer.addEventListener('ended', playNext);
-    progressBar.addEventListener('click', seek);
-
-    // Listen for play events from other players
-    window.addEventListener('music-play-started', function(e) {
-        if (e.detail.playerId !== 'footer-audio-player') {
-            pauseSong();
-        }
-    });
-
-    // Initial load
-    loadSong(currentSongIndex);
-    
-     // Save current times before unloading the page
-    window.addEventListener('beforeunload', function() {
-        localStorage.setItem('footer_savedTimes', JSON.stringify(savedTimes));
-    });
-});
-
-</script>
 <script>
         // Select the button and audio elements
         // const playPauseButton = document.getElementById('footer-play-pause-button');
