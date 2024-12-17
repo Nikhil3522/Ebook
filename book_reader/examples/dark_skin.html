@@ -6,8 +6,12 @@
         <script src="../src/js/flipbook.js"></script>
         <script type="text/javascript">
             const urlParams = new URLSearchParams(window.location.search);
-            const bookTitle = urlParams.get('language');
-            var rightToLeftDirection = bookTitle !== "English";
+            const bookLanguage = urlParams.get('language');
+            const bookId = urlParams.get('id');
+            var rightToLeftDirection = bookLanguage !== "English";
+
+            const result = JSON.parse(localStorage.getItem('bookLastPgae')).find(item => item[bookId] !== undefined);
+            var lastReadPage = result ? result[bookId] : 0;
 
             document.addEventListener('DOMContentLoaded', function () {
                 var container = document.getElementById('container');
@@ -19,14 +23,11 @@
                 const pages = [];
 
                 // Get a parameter by its name
-                const bookTitle = urlParams.get('id'); // "John"
-                const totalPage = urlParams.get('total_page');   // "30"
-                const folderName = bookTitle.replace(/ /g, "");
-                // console.log(name, age);
-                const baseUrl = `https://roshan1.b-cdn.net/ebook/${bookTitle}/${folderName}_page-`;
+                
+                const totalPage = urlParams.get('total_page');
+                const folderName = bookId.replace(/ /g, "");
+                const baseUrl = `https://roshan1.b-cdn.net/ebook/${bookId}/${folderName}_page-`;
 
-                // console.log("baseUrl", baseUrl);
-                // console.log("folderName", folderName);
 
                 for (let i = 1; i <= totalPage; i++) {
                     let pageType = '';

@@ -69,7 +69,7 @@ FLIPBOOK.Main = function (options, elem) {
         pdfAutoLinks: false,
         htmlLayer: true,
         rightToLeft: rightToLeftDirection,
-        startPage: 0,
+        startPage: lastReadPage,
         sound: true,
         backgroundColor: 'rgb(81, 85, 88)',
         backgroundImage: '',
@@ -4251,8 +4251,37 @@ FLIPBOOK.Main.prototype = {
             self.currentPageInput.value = '';
         });
 
+        var restTime = null;
         this.currentPageInput.addEventListener('blur', function () {
             self.currentPageInput.value = self.currentPageString;
+
+            clearTimeout(restTime);
+
+            restTime = setTimeout(() => {
+
+                let lastViewPageData = JSON.parse(localStorage.getItem('bookLastPgae')) || [];
+
+                // Check if the object with bookId already exists in the array
+                let found = false;
+                for (let i = 0; i < lastViewPageData.length; i++) {
+                    if (lastViewPageData[i][bookId] !== undefined) {
+                        // If the key exists, update its value
+                        lastViewPageData[i][bookId] = self.currentPageInput.value.split('-')[0];
+                        found = true;
+                        break;
+                    }
+                }
+
+                // If the bookId does not exist, add a new object to the array
+                if (!found) {
+                    lastViewPageData.push({
+                        [bookId]: self.currentPageInput.value.split('-')[0]
+                    });
+                }
+
+                localStorage.setItem('bookLastPgae', JSON.stringify(lastViewPageData));
+                
+            }, 3000);
         });
 
         form.appendChild(this.currentPageInput);
