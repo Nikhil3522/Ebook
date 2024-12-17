@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="box-tocart d-flex">
                                         <div class="addtocart__actions">
-                                            <button class="tocart" onclick="window.location.href='book_reader/examples/dark_skin.html?id=<?php echo $book_id; ?>&language=<?= $lang; ?>&total_page=<?php echo $total_page; ?>'" type="submit" title="Read this book">
+                                            <button class="tocart" onclick="readNowButton('<?= $book_id ?>', '<?= $lang ?>', '<?= $total_page ?>')" type="submit" title="Read this book">
                                                 Read Now
                                             </button>
                                         </div>

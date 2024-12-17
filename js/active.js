@@ -596,7 +596,6 @@ function showNotification(message) {
 
 // Function to add a favorite and trigger notification
 function addFavourite(event, bookId) {
-  console.log("Adding favorite:", bookId);
   
   // Hide the list item if the event target exists
   if (event) {
@@ -691,4 +690,11 @@ function languageSort(e){
   offset = 0;
   language = e.target.value
   loadMoreData();
+}
+
+
+function readNowButton(bookId, lang, totalPage){
+  addFavourite(null, bookId);
+
+  window.location.href=`book_reader/examples/dark_skin.html?id=${bookId}&language=${lang}&total_page=${totalPage}`;
 }
