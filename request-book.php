@@ -45,8 +45,31 @@
         include('navbar.php');
         include('cons.php');
     ?>
+    <!-- Start Search Popup -->
+    <div class="box-search-content search_active block-bg close__top is-visible">
+        <form action="api.php" id="search_mini_form" class="minisearch">
+            <div class="field__search">
+                <input type="hidden" name="function_name" value="req_book" />
+                <input type="text" name="book_name" placeholder="Write Book name here..." required>
+                <div class="action">
+                    <a href="#"><i class="zmdi zmdi-search"></i></a>
+                </div>
+                <p style="color: gray; text-align: left; margin-top: 10px;">We shall try to add the requested book soon. Thanks.</p>
+                <div class="button-box" style="display: flex; margin-top: 15px;">
+                    <button class="register-btn btn" type="submit">
+                        <span id="next-btn-for-loader">Submit</span>
+                    </button>
+                </div>
+            </div>
+            
+        </form>
+        <div class="close__wrap" onclick="window.location.href='index.php'">
+            <span>close</span>
+        </div>
+    </div>
+    <!-- End Search Popup -->
     <!-- //Header -->
-    <section>
+    <!-- <section>
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 m-auto">
@@ -70,7 +93,7 @@
         <button id="triggerToastButton" class="btn btn-primary">Show Notification</button>
 
 
-    </section>
+    </section> -->
     
     <?php include('footer.php') ?>
 </div>

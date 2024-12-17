@@ -326,9 +326,9 @@
           e.preventDefault();
           container.toggleClass('is-visible');
         });
-        $('.close__wrap').on('click', function () {
-          container.removeClass('is-visible');
-        });
+        // $('.close__wrap').on('click', function () {
+        //   container.removeClass('is-visible');
+        // });
     }
     searchToggler();
 
@@ -629,7 +629,10 @@ function removeFavourite(bookId){
       }
   },
   })
-  
+
+  // Show the notification
+  showNotification("Book removed!");
+
 }
 
 

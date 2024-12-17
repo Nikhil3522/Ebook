@@ -103,6 +103,19 @@ switch ($function_name) {
         echo json_encode($data);
 
         break;
+    case 'req_book':
+        $book_name = $_GET['book_name'];
+
+        $query = "INSERT INTO requested_book(title) VALUES(?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('s', $book_name);
+        $stmt->execute();
+
+        echo "SUCCESS";
+
+        header('location: index.php');
+        exit;
+        break;
     default:
         # code...
         break;
