@@ -57,7 +57,7 @@
     <img src="images/loader7.gif" />
 </div>
 <!-- Main wrapper -->
-<div class="wrapper" id="wrapper">
+<div class="wrapper d-none d-md-block" id="wrapper">
     <!-- Header -->
     <?php 
         include('navbar.php');
@@ -384,6 +384,9 @@
         </div>
     </div>
     <!-- END QUICKVIEW PRODUCT -->
+</div>
+<div class="d-block d-md-none mt-4">
+    <p style="font-size: 17px; text-align: center;">This site is only visible on desktop view.</p>
 </div>
 <!-- //Main wrapper -->
 
