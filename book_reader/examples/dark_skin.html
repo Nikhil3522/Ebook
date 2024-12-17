@@ -5,7 +5,10 @@
         <link rel="stylesheet" type="text/css" href="../src/css/flipbook.css" />
         <script src="../src/js/flipbook.js"></script>
         <script type="text/javascript">
-            // console.log("fsad");
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookTitle = urlParams.get('language');
+            var rightToLeftDirection = bookTitle !== "English";
+
             document.addEventListener('DOMContentLoaded', function () {
                 var container = document.getElementById('container');
                 var options = {
@@ -14,7 +17,6 @@
                 };
 
                 const pages = [];
-                const urlParams = new URLSearchParams(window.location.search);
 
                 // Get a parameter by its name
                 const bookTitle = urlParams.get('id'); // "John"

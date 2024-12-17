@@ -40,7 +40,7 @@ function createItemHtml_grid(item) {
 
 function createItemHTML_list(item){
     var link = `single-product.php?book_id=${item.id}`;
-    var bookReadLink = `book_reader/examples/dark_skin.html?book=${item.title}&total_page=${item.total_page}`;
+    var bookReadLink = `book_reader/examples/dark_skin.html?id=${item.id}&language=${item.lang}&total_page=${item.total_page}`;
     return `<div class="list__view mt-4" id="itemId-${item.id}">
                 <div class="thumb">
                     <a class="first__img" href="${link}">
@@ -128,7 +128,9 @@ function loadMoreData(category_id_parm = null) {
             }else{
                 container = $('#ebook_row_container');
                 itemHtml = createItemHtml_grid;
-                items.pop();
+                if(items.length > 8){
+                    items.pop();
+                }
             }
 
             if(typeof(category_id_parm) === "number"){

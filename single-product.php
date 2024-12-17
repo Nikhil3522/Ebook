@@ -77,6 +77,7 @@
         $thumbnail1 = $result['thumbnail1'];
         $thumbnail2 = $result['thumbnail2'];
         $cat_id = $result['cat_id'];
+        $lang = $result['lang'];
         $total_page = $result['total_page'];
 
     ?>
@@ -112,7 +113,7 @@
                                     </div>
                                     <div class="box-tocart d-flex">
                                         <div class="addtocart__actions">
-                                            <button class="tocart" onclick="window.location.href='book_reader/examples/dark_skin.html?id=<?php echo $book_id; ?>&book=<?php echo $title; ?>&total_page=<?php echo $total_page; ?>'" type="submit" title="Read this book">
+                                            <button class="tocart" onclick="window.location.href='book_reader/examples/dark_skin.html?id=<?php echo $book_id; ?>&language=<?= $lang; ?>&total_page=<?php echo $total_page; ?>'" type="submit" title="Read this book">
                                                 Read Now
                                             </button>
                                         </div>

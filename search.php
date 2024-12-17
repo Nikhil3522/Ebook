@@ -282,6 +282,7 @@
                                         $thumbanil2 = $row['thumbnail2'];
                                         $description = $row['description'];
                                         $link = "single-product.php?book_id=$id";
+                                        $lang = $row['lang'];
                                         $total_page = $row['total_page'];
                                 ?>
                                 <!-- Start Single Product -->
@@ -306,7 +307,7 @@
                                         </ul>
                                         <p><?php echo $description; ?></p>
                                         <ul class="cart__action d-flex">
-                                            <li class="cart"><a href="book_reader/examples/dark_skin.html?book=<?php echo $title; ?>&total_page=<?php echo $total_page; ?>">Read</a></li>
+                                            <li class="cart"><a href="book_reader/examples/dark_skin.html?id=<?= $id; ?>&language=<?= $lang; ?>&total_page=<?php echo $total_page; ?>">Read Now</a></li>
                                             <li class="wishlist"><a href=""></a></li>
                                         </ul>
 

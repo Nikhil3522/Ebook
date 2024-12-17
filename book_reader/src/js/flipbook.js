@@ -68,7 +68,7 @@ FLIPBOOK.Main = function (options, elem) {
         disableAutoFetch: true,
         pdfAutoLinks: false,
         htmlLayer: true,
-        rightToLeft: false,
+        rightToLeft: rightToLeftDirection,
         startPage: 0,
         sound: true,
         backgroundColor: 'rgb(81, 85, 88)',
