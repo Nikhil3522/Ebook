@@ -4259,7 +4259,7 @@ FLIPBOOK.Main.prototype = {
 
             restTime = setTimeout(() => {
 
-                let lastViewPageData = JSON.parse(localStorage.getItem('bookLastPgae')) || [];
+                let lastViewPageData = JSON.parse(localStorage.getItem('bookLastPage')) || [];
 
                 // Check if the object with bookId already exists in the array
                 let found = false;
@@ -4279,9 +4279,9 @@ FLIPBOOK.Main.prototype = {
                     });
                 }
 
-                localStorage.setItem('bookLastPgae', JSON.stringify(lastViewPageData));
+                localStorage.setItem('bookLastPage', JSON.stringify(lastViewPageData));
                 
-            }, 3000);
+            }, 2000);
         });
 
         form.appendChild(this.currentPageInput);

@@ -1,92 +1,98 @@
 <!doctype html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="../src/css/flipbook.css" />
-        <script src="../src/js/flipbook.js"></script>
-        <script type="text/javascript">
-            const urlParams = new URLSearchParams(window.location.search);
-            const bookLanguage = urlParams.get('language');
-            const bookId = urlParams.get('id');
-            var rightToLeftDirection = bookLanguage !== "English";
 
-            const result = JSON.parse(localStorage.getItem('bookLastPgae')).find(item => item[bookId] !== undefined);
-            var lastReadPage = result ? result[bookId] : 0;
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../src/css/flipbook.css" />
+    <script src="../src/js/flipbook.js"></script>
+    <script type="text/javascript">
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookLanguage = urlParams.get('language');
+        const bookId = urlParams.get('id');
+        var rightToLeftDirection = bookLanguage !== "English";
 
-            document.addEventListener('DOMContentLoaded', function () {
-                var container = document.getElementById('container');
-                var options = {
-                    pages: [],
-                    skin: 'dark',
-                };
+        let bookLastPage_localStorage = JSON.parse(localStorage.getItem('bookLastPage')) || [];
 
-                const pages = [];
+        const result = bookLastPage_localStorage.find(item => item[bookId] !== undefined);
+        var lastReadPage = result ? result[bookId] : 0;
 
-                // Get a parameter by its name
-                
-                const totalPage = urlParams.get('total_page');
-                const folderName = bookId.replace(/ /g, "");
-                const baseUrl = `https://roshan1.b-cdn.net/ebook/${bookId}/${folderName}_page-`;
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.getElementById('container');
+            var options = {
+                pages: [],
+                skin: 'dark',
+            };
+
+            const pages = [];
+
+            // Get a parameter by its name
+
+            const totalPage = urlParams.get('total_page');
+            const folderName = bookId.replace(/ /g, "");
+            const baseUrl = `https://roshan1.b-cdn.net/ebook/${bookId}/${folderName}_page-`;
 
 
-                for (let i = 1; i <= totalPage; i++) {
-                    let pageType = '';
-                    if (i === 1) {
-                        pageType = 'Cover';
-                    } else if (i === 2) {
-                        pageType = 'Content';
-                    } else {
-                        pageType = `Page no. ${i}`;
-                    }
-
-                    options.pages.push({
-                        src: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
-                        thumb: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
-                        title: pageType,
-                    });
-
-                    // console.log({
-                    //     src: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
-                    //     thumb: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
-                    //     title: pageType,
-                    // })
+            for (let i = 1; i <= totalPage; i++) {
+                let pageType = '';
+                if (i === 1) {
+                    pageType = 'Cover';
+                } else if (i === 2) {
+                    pageType = 'Content';
+                } else {
+                    pageType = `Page no. ${i}`;
                 }
 
-        
-                var flipbook = new FlipBook(container, options);
-        
-                // // Add new pages after 3 seconds
-                // setTimeout(function () {
-                //     var newPages = [
-                //         {
-                //             src: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0004.jpg',
-                //             thumb: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0004.jpg',
-                //             title: 'Chapter 1',
-                //         },
-                //         {
-                //             src: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0005.jpg',
-                //             thumb: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0005.jpg',
-                //             title: 'Chapter 2',
-                //         }
-                //     ];
+                options.pages.push({
+                    src: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                    thumb: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                    title: pageType,
+                });
 
-                //     // Update options with new pages
-                //     options.pages.push(...newPages);
+                // console.log({
+                //     src: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                //     thumb: `${baseUrl}${String(i).padStart(4, '0')}.jpg`,
+                //     title: pageType,
+                // })
+            }
 
-                //     // Clear the container and reinitialize the FlipBook
-                //     container.innerHTML = ''; // Clear previous flipbook content
-                //     flipbook = new FlipBook(container, options); // Reinitialize with updated options
-                // }, 3000);
 
-            });
-        </script>
-        
-    </head>
+            var flipbook = new FlipBook(container, options);
 
-    <body>
-        <button style="position: absolute; z-index: 10; right: 10px; background: transparent; border: none; color: white; font-weight: bold; padding: 10px; cursor: pointer;" onclick="window.location.href='../../index.php'">
-            Close
-        </button>
-        <div id="container"></div>
-    </body>
+            // // Add new pages after 3 seconds
+            // setTimeout(function () {
+            //     var newPages = [
+            //         {
+            //             src: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0004.jpg',
+            //             thumb: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0004.jpg',
+            //             title: 'Chapter 1',
+            //         },
+            //         {
+            //             src: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0005.jpg',
+            //             thumb: 'https://roshan1.b-cdn.net/ebook/Great%20Expectations/GreatExpectations_page-0005.jpg',
+            //             title: 'Chapter 2',
+            //         }
+            //     ];
+
+            //     // Update options with new pages
+            //     options.pages.push(...newPages);
+
+            //     // Clear the container and reinitialize the FlipBook
+            //     container.innerHTML = ''; // Clear previous flipbook content
+            //     flipbook = new FlipBook(container, options); // Reinitialize with updated options
+            // }, 3000);
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <button
+        style="position: absolute; z-index: 10; right: 10px; background: transparent; border: none; color: white; font-weight: bold; padding: 10px; cursor: pointer;"
+        onclick="window.location.href='../../index.php'">
+        Close
+    </button>
+    <div id="container"></div>
+</body>
+
 </html>
