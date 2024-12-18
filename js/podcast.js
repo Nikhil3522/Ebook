@@ -13,6 +13,8 @@ var currentSongIndex = parseInt(localStorage.getItem('footer_currentSongIndex'))
 var savedTimes = JSON.parse(localStorage.getItem('footer_savedTimes')) || {};
 const url = window.location.href;
 const params = new URLSearchParams(new URL(url).search);
+var currentPlayPodcastId = null;
+var currentPodcastThumbnail = null;
 
 // Function to load the song at the given index
 function loadSong(index) {
@@ -130,10 +132,11 @@ function updatePlayPauseButton() {
 
 let offset = 0;
 
-function playAudio(audioUrl, songTitle, thumbnail) {
+function playAudio(podcastId, audioUrl, songTitle, thumbnail) {
 
     if ($('#footer-music-player').is(':hidden')) {
         $('#footer-music-player').slideDown('slow');
+        $('#show-all-epi-btn').slideDown('slow');
     }
 
     songs.push({ title: songTitle, url: audioUrl, thumbnail: thumbnail });
@@ -152,6 +155,13 @@ function playAudio(audioUrl, songTitle, thumbnail) {
     // Play the audio
     audioPlayer.play();
 
+    currentPlayPodcastId = podcastId;
+    currentPodcastThumbnail = thumbnail;
+
+    if($('#all-epi-container').is(':visible')){
+        loadAllEpisode();
+    }
+
     // Update the play/pause button to reflect the current state
     updatePlayPauseButton();
 }
@@ -160,7 +170,7 @@ function createItemHtml_grid(item) {
     var link = `#`;
     var audioUrl = item.audio_url;
     return `
-        <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12" onclick="playAudio('${audioUrl}', '${item.title}', '${item.thumbnail}')">
+        <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12" onclick="playAudio('${item.id}', '${audioUrl}', '${item.title}', '${item.thumbnail}')">
             <div class="product__thumb">
                 <a class="first__img" href="${link}">
                     <img src="${item.thumbnail}" alt="product image">
@@ -223,3 +233,28 @@ function loadPodcast() {
 
 loadPodcast();
 $('#load_more_button').on('click', loadPodcast);
+
+
+function loadAllEpisode(){
+    $.ajax({
+        method: 'GET',
+        url: 'api.php',
+        data: { function_name: 'load_podcast_episodes', podcast_parent_id : currentPlayPodcastId },
+        success: function (res){
+            let resArray = JSON.parse(res);
+            $('#all-episode-list').html("");
+            resArray.forEach(item => {
+                $('#all-episode-list').append(`<li onclick="playAudio('${currentPlayPodcastId}', '${item.audio_url}', '${item.title}', '${currentPodcastThumbnail}')">${item.title}</li>`)
+            });
+        },
+        error: function(err){
+        console.log("Error in loading all episode of a podcast: ",err);
+        }
+    });
+}
+
+function showEpisodeList(){
+    $('#show-all-epi-btn').slideToggle("fast");
+    loadAllEpisode();
+    $('#all-epi-container').slideToggle("fast");
+}

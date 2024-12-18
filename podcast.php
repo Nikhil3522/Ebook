@@ -50,6 +50,9 @@
         background: white !important;
     }
 
+    #ebook_row_container > div {
+        max-width: 300px;
+    }
 
 #footer-music-player {
     font-family: "sofia-pro", sans-serif;
@@ -164,6 +167,58 @@
     background-color: #6ec3e8;
 }
 
+#show-all-epi-btn{
+    display: none;
+    background: #363c43;
+    min-height: 40px;
+    max-height: 40px;
+    min-width: 241px;
+    position: fixed;
+    z-index: 10;
+    bottom: 55px;
+    margin-left: 10px;
+    padding: 10px;
+    overflow: auto;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#all-epi-container{
+    display: none;
+    background: #363c43;
+    min-height: 100px;
+    max-height: 300px;
+    min-width: 240px;
+    max-width: 95vw;
+    position: fixed;
+    z-index: 10;
+    bottom: 55px;
+    margin-left: 10px;
+    padding: 10px;
+    /* overflow: auto; */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: scroll; /* Allow scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+#all-epi-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+
+#all-episode-list > li{
+    margin: 2px auto 2px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#all-episode-list > li:hover{
+    color: gray;
+}
+
 @media only screen and (max-width: 767px) {
 #footer-artist-name{
     display:none;
@@ -236,6 +291,11 @@
         </div>
     </div>
     <!-- End Search Popup -->
+    <button onclick="showEpisodeList()" id="show-all-epi-btn">Show All Episode</button>
+    <div id="all-epi-container">
+        <h5 style="text-align: center; color: white;" onclick="showEpisodeList()">All Episode <img src="images/icons/down-arrow.png" alt="down-arrow" width="25px"/></h5>
+        <ol style="color: white;" id="all-episode-list"></ol>
+    </div>
     <div id="footer-music-player">
         <div class="player-container">
             <div class="controls-and-info">
@@ -277,29 +337,7 @@
             <div class="row">
                 <?php include('side_podcast_category.php') ?>
                 <div class="col-lg-9 col-12 order-1 order-lg-2">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
-                                <div class="shop__list nav justify-content-center" role="tablist">
-                                    <!-- <a class="nav-item nav-link active" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a> -->
-                                    <!-- <a class="nav-item nav-link" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a> -->
-                                </div>
-                                <!-- <p>Showing 1–12 of 40 results</p> -->
-                                <div class="orderby__wrapper">
-                                    <span>Sort By</span>
-                                    <select class="shot__byselect" disabled>
-                                        <option>Default sorting</option>
-                                        <option>HeadPhone</option>
-                                        <option>Furniture</option>
-                                        <option>Jewellery</option>
-                                        <option>Handmade</option>
-                                        <option>Kids</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab__container tab-content">
+                    <div class="tab__container tab-content" style="margin-top: 50px;">
                         <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
                             <div class="row" id="ebook_row_container"></div>
                         </div>

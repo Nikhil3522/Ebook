@@ -116,6 +116,17 @@ switch ($function_name) {
         header('location: index.php');
         exit;
         break;
+    case 'load_podcast_episodes':
+        $podcast_parent_id = $_GET['podcast_parent_id'];
+
+        $stmt = $conn->prepare("SELECT id, title, audio_url, season, episode FROM pulse.podcast WHERE parent_id = ?");
+        $stmt->bind_param('i', $podcast_parent_id);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        
+        echo json_encode($data);
     default:
         # code...
         break;
