@@ -54,6 +54,10 @@
         max-width: 300px;
     }
 
+    .container{
+        margin-top: 60px;
+    }
+
 #footer-music-player {
     font-family: "sofia-pro", sans-serif;
     color: #fff;
@@ -220,6 +224,14 @@
 }
 
 @media only screen and (max-width: 767px) {
+    .container{
+        margin-top: 0px;
+    }
+
+    #ebook_row_container > div{
+        width: 49%;
+    }
+
 #footer-artist-name{
     display:none;
 }
@@ -333,7 +345,7 @@
     </div>
     <!-- Start Shop Page -->
     <div class="page-shop-sidebar left--sidebar bg--white pb-4" style="border-bottom: 1px solid gray; display: flex; justify-content: center;">
-        <div class="container" style="margin-top: 60px;">
+        <div class="container">
             <div class="row">
                 <?php include('side_podcast_category.php') ?>
                 <div class="col-lg-9 col-12 order-1 order-lg-2">
@@ -346,7 +358,7 @@
                         </div>
 
                         <!-- Load more button -->
-                        <div class="d-flex">
+                        <div class="d-flex mb-4">
                             <button class="m-auto" id="load_more_button">
                                 <span id="load_more_text">Load More</span>
                                 <span  id="load_more_loading" ><img src="./images/loader5.gif" alt="loader" width="100%"/></span> 
