@@ -57,7 +57,7 @@
     <img src="images/loader7.gif" />
 </div>
 <!-- Main wrapper -->
-<div class="wrapper d-none d-md-block" id="wrapper">
+<div class="wrapper d-md-block" id="wrapper">
     <!-- Header -->
     <?php 
         include('navbar.php');
@@ -106,7 +106,7 @@
             </div>
             <div class="row mt--50">
                 <div class="col-md-12 col-lg-12 col-sm-12">
-                    <div class="product__nav nav justify-content-center" role="tablist" style="row-gap: 15px;">
+                    <div class="product__nav nav justify-content-center" id="all-category-container" role="tablist" style="row-gap: 15px;">
                         <a class="nav-item nav-link" id="all-category-btn" onclick="window.location.reload()">ALL</a>
                         <?php
                             $query = "SELECT A.*, 
@@ -384,9 +384,6 @@
         </div>
     </div>
     <!-- END QUICKVIEW PRODUCT -->
-</div>
-<div class="d-block d-md-none mt-4">
-    <p style="font-size: 17px; text-align: center;">This site is only visible on desktop view.</p>
 </div>
 <!-- //Main wrapper -->
 

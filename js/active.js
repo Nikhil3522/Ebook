@@ -568,6 +568,27 @@
 
 })(jQuery);
 
+// Function to check the header class and update logo width
+function adjustLogoWidth() {
+  var header = document.getElementById('wn__header');
+  var logo = document.getElementById('logo');
+  
+  if (header.classList.contains('is-sticky')) {
+    if (window.innerWidth <= 768) {
+      logo.style.marginTop = '-12px';
+    }
+
+    logo.style.width = '50px';  
+  } else {
+    logo.style.width = '80px';
+  }
+}
+
+window.addEventListener('scroll', function() {
+  // Call function to adjust logo width based on header class
+  adjustLogoWidth();
+});
+
 
 // Function to show the toast notification
 function showNotification(message) {
@@ -637,12 +658,20 @@ function removeFavourite(bookId){
 
 function toggleLanguageDropDown(){
   $('#user-dropdown').hide();
+  $('#menu-dropdown').hide();
   $('#language-dropdown').slideToggle();
 }
 
 function toggleUserDropDown(){
   $('#language-dropdown').hide();
+  $('#menu-dropdown').hide();
   $('#user-dropdown').slideToggle();
+}
+
+function toggleMobileMenu(){
+  $('#language-dropdown').hide();
+  $('#user-dropdown').hide();
+  $('#menu-dropdown').slideToggle();
 }
 
 function shuffleDivs(idValue = "sort-parentDiv") {

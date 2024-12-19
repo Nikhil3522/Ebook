@@ -636,7 +636,7 @@ ul {
 
 a#scrollUp {
     background: #ef0029;
-    color: #0046b5;
+    color: white;
     bottom: 55px;
     right: 40px;
     border-radius: 100px;
@@ -651,7 +651,7 @@ a#scrollUp {
 
 a#scrollUp:hover {
     background: #0046b5;
-    color: #ef0029;
+    color: white;
 }
 
 img {
@@ -1227,6 +1227,13 @@ a {
     padding: 80px 0;
 }
 
+.dropdown-menu-style{
+    position: absolute;
+    inset: 40px 200px auto auto;
+    margin: 0px;
+    transform: translate(0px, 32px);
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .section-padding--xlg {
         padding: 80px 0;
@@ -1270,6 +1277,21 @@ a {
 }
 
 @media only screen and (max-width: 767px) {
+    #slider .owl-stage-outer{
+        height: 120px;
+    }
+    #all-category-container{
+        max-height: 80px;
+        overflow: scroll;
+    }
+    #ebook_row_container > div {
+        width: 49%;
+    }
+    .dropdown-menu-style{
+        inset: 40px 20px auto auto;
+    }
+   
+    
     .section-padding--xlg {
         padding: 80px 0;
     }
@@ -2370,9 +2392,30 @@ Elements Styles
     color: #ce7852;
 }
 
+#category-container{
+    margin-top: 60px;
+}
+
 @media only screen and (max-width: 767px) {
     .minicart-content-wrapper .single__items {
         border: 0 none;
+    }
+    .block-bg.close__top .close__wrap{
+        right: 10px;
+    }
+    .minisearch .field__search{
+        max-width: 90%;
+    }
+    #book-category-list{
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+    #category-container{
+        margin-top: 10px;
+    }
+
+    #nav-grid > div > div{
+        max-width: 49%;
     }
 }
 
@@ -8669,6 +8712,14 @@ a.checkout__title {
     flex-wrap: wrap;
 }
 
+.single-list a{
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+}
+
 #ebook_row_container > div{
     max-width: 250px;
 }
@@ -8769,7 +8820,7 @@ a.checkout__title {
     display: none;
 }
 
-#user-dropdown{
+#user-dropdown, #menu-dropdown{
     display: none;
 }
 
@@ -9115,6 +9166,10 @@ a.checkout__title {
 
     section.wn_contact_area {
         padding-bottom: 60px;
+    }
+
+    .slick-slide.slick-center .product__thumb a::after{
+        background: transparent;
     }
 }
 

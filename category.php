@@ -49,6 +49,10 @@
     .mean-bar{
         background: white !important;
     }
+
+    #ebook_row_container > div {
+        max-width: 300px;
+    }
 </style>
 
 <body>
@@ -84,7 +88,7 @@
     <!-- End Search Popup -->
     <!-- Start Shop Page -->
     <div class="page-shop-sidebar left--sidebar bg--white" style="border-bottom: 1px solid gray; display: flex; justify-content: center;">
-        <div class="container" style="margin-top: 60px;">
+        <div class="container" id="category-container">
             <div class="row">
                 <?php include('side_book_category.php') ?>
                 <div class="col-lg-9 col-12 order-1 order-lg-2">
@@ -96,7 +100,7 @@
                                     <a class="nav-item nav-link" onclick="changeLayout()" data-bs-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
                                 </div>
 
-                                <div class="d-flex" style="column-gap: 20px;">
+                                <div class="d-flex" style="column-gap: 20px; flex-wrap: wrap;">
                                     <div class="orderby__wrapper">
                                         <span>Language</span>
                                         <select class="shot__byselect" onchange="languageSort(event)">

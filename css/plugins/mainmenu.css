@@ -100,13 +100,14 @@ a.meanmenu-reveal {
 	position: relative;
 	float: left;
 	width: 100%;
+	height: 45px;
 }
 
 .mean-container .mean-nav ul li a {
 	display: block;
 	float: left;
 	width: calc(100% - 60px);
-	padding: 12px 30px;
+	/* padding: 12px 30px; */
 	margin: 0;
 	text-align: left;
 	color: #333;
@@ -115,6 +116,7 @@ a.meanmenu-reveal {
 	text-decoration: none;
 	text-transform: uppercase;
 	font-size: 14px;
+	line-height: 40px;
 }
 
 .mean-container .mean-nav ul li li a {

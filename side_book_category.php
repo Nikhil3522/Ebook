@@ -16,7 +16,7 @@
         <aside class="widget__categories products--cat" style="margin-top: 40px;">
             <h3 class="widget__title">Book Categories</h3>
            
-            <ul>
+            <ul id="book-category-list">
                 <li>
                     <a 
                         href="category.php?category_id=<?php echo $category_id; ?>" 
