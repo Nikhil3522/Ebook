@@ -59,7 +59,7 @@
     }
 
 #footer-music-player {
-    font-family: "sofia-pro", sans-serif;
+    font-family: sans-serif;
     color: #fff;
     width: 100%;
     padding: 0px;
@@ -90,10 +90,10 @@
 #footer-music-player .control-button svg {
     width: 20px;
     height: 20px;
-    fill: #6ec3e8;
+    fill: #ef0029;
 }
 #footer-music-player .play-pause-button {
-    background-color: #6ec3e8;
+    background-color: #ef0029;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -112,7 +112,7 @@
     margin-top:-5px;
 }
 #footer-music-player #footer-song-title {
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: bold;
     line-height:1em;
     margin-left: 10px;
@@ -150,7 +150,7 @@
     fill: currentColor;
 }
 #footer-music-player .time-display {
-    font-size: 0.9rem;
+    font-size: 14px;
     margin-left: 10px;
     min-width: 75px; /* Adjust this value as needed */
     text-align: right;
@@ -192,7 +192,7 @@
     display: none;
     background: #363c43;
     min-height: 100px;
-    max-height: 300px;
+    max-height: 310px;
     min-width: 240px;
     max-width: 95vw;
     position: fixed;
@@ -214,8 +214,8 @@
 
 
 #all-episode-list > li{
-    margin: 2px auto 2px 10px;
-    font-size: 13px;
+    margin: 3px auto 3px 10px;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -303,9 +303,9 @@
         </div>
     </div>
     <!-- End Search Popup -->
-    <button onclick="showEpisodeList()" id="show-all-epi-btn">Show All Episode</button>
+    <button onclick="showEpisodeList()" id="show-all-epi-btn">Show All Episodes</button>
     <div id="all-epi-container">
-        <h5 style="text-align: center; color: white;" onclick="showEpisodeList()">All Episode <img src="images/icons/down-arrow.png" alt="down-arrow" width="25px"/></h5>
+        <h5 style="text-align: center; color: white; font-size: 14px; margin-bottom: 10px;" onclick="showEpisodeList()">All Episodes <img src="images/icons/down-arrow.png" alt="down-arrow" width="20px"/></h5>
         <ol style="color: white;" id="all-episode-list"></ol>
     </div>
     <div id="footer-music-player">
