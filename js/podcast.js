@@ -15,6 +15,8 @@ const url = window.location.href;
 const params = new URLSearchParams(new URL(url).search);
 var currentPlayPodcastId = null;
 var currentPodcastThumbnail = null;
+const pathname = window.location.pathname;
+const filename = pathname.split('/').pop();
 
 // Function to load the song at the given index
 function loadSong(index) {
@@ -166,18 +168,28 @@ function playAudio(podcastId, audioUrl, songTitle, thumbnail) {
     updatePlayPauseButton();
 }
 
-function createItemHtml_grid(item) {
+function createItemHtml_grid(item, pageType) {
     var link = `#`;
-    var audioUrl = item.audio_url;
+    var audioUrl = null;
+    var thumbnailUrl = null;
+
+    if(pageType === "podcast.php"){
+        audioUrl = item.audio_url;
+        thumbnailUrl = item.thumbnail;
+    }else{
+        audioUrl = `https://roshan1.b-cdn.net/${item.audio_url}`;
+        thumbnailUrl = `https://roshan1.b-cdn.net/${item.thumbnail}`;
+    }
+    
     return `
-        <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12" onclick="playAudio('${item.id}', '${audioUrl}', '${item.title}', '${item.thumbnail}')">
+        <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12" onclick="playAudio('${item.id}', '${audioUrl}', '${item.title}', '${thumbnailUrl}')">
             <div class="product__thumb">
                 <a class="first__img" href="${link}">
-                    <img src="${item.thumbnail}" alt="product image">
+                    <img src="${thumbnailUrl}" alt="product image">
                 </a>
             </div>
-            <div class="product__content content--center">
-                <h4><a href="${link}">${item.title}</a></h4>
+            <div class="content--center">
+                <h4 style="font-size: 16px; padding: 10px 2px; font-weight: 500;"><a href="${link}">${item.title}</a></h4>
             </div>
         </div>
     `;
@@ -194,7 +206,8 @@ function loadPodcast() {
         data: {
             offset: offset,
             function_name: 'load_podcast',
-            category_id: category_id_parm ? category_id_parm : null
+            category_id: category_id_parm ? category_id_parm : null,
+            filename: filename
         },
         success: function (data) {
 
@@ -212,7 +225,7 @@ function loadPodcast() {
             let itemHtml = createItemHtml_grid;
 
             items.forEach((item) => {
-                container.append(itemHtml(item));
+                container.append(itemHtml(item, filename));
             })
 
             offset += 9;
@@ -239,7 +252,7 @@ function loadAllEpisode(){
     $.ajax({
         method: 'GET',
         url: 'api.php',
-        data: { function_name: 'load_podcast_episodes', podcast_parent_id : currentPlayPodcastId },
+        data: { function_name: 'load_podcast_episodes', podcast_parent_id : currentPlayPodcastId, filename: filename },
         success: function (res){
             let resArray = JSON.parse(res);
             $('#all-episode-list').html("");

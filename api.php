@@ -55,6 +55,14 @@ switch ($function_name) {
         break;
     case 'load_podcast':
         $offset = intval($_GET['offset']); // Ensure offset is an integer
+        $file_name = $_GET['filename'];
+
+        if($file_name === "podcast.php"){
+            $table_name = " pulse.podcast ";
+        }else{
+            $table_name = " audiobook.audiobook ";
+        }
+
         if(isset($_GET['category_id']) && $_GET['category_id'] != NULL){
             $category_id = $_GET['category_id'];
 
@@ -65,9 +73,9 @@ switch ($function_name) {
                         A.thumbnail, 
                         B.audio_url
                     FROM 
-                        pulse.podcast AS A
+                        $table_name AS A
                     LEFT JOIN 
-                        pulse.podcast AS B 
+                        $table_name AS B 
                     ON 
                         B.parent_id = A.id AND B.season = 1 AND B.episode = 1
                     WHERE 
@@ -83,9 +91,9 @@ switch ($function_name) {
                         A.thumbnail, 
                         B.audio_url
                     FROM 
-                        pulse.podcast AS A
+                        $table_name AS A
                     LEFT JOIN 
-                        pulse.podcast AS B 
+                        $table_name AS B 
                     ON 
                         B.parent_id = A.id AND B.season = 1 AND B.episode = 1
                     WHERE 
@@ -118,8 +126,15 @@ switch ($function_name) {
         break;
     case 'load_podcast_episodes':
         $podcast_parent_id = $_GET['podcast_parent_id'];
+        $file_name = $_GET['filename'];
 
-        $stmt = $conn->prepare("SELECT id, title, audio_url, season, episode FROM pulse.podcast WHERE parent_id = ?");
+        if($file_name === "podcast.php"){
+            $table_name = " pulse.podcast ";
+        }else{
+            $table_name = " audiobook.audiobook ";
+        }
+
+        $stmt = $conn->prepare("SELECT id, title, audio_url, season, episode FROM $table_name WHERE parent_id = ?");
         $stmt->bind_param('i', $podcast_parent_id);
         $stmt->execute();
         
