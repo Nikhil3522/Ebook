@@ -4599,6 +4599,15 @@ FLIPBOOK.Main.prototype = {
     },
 
     toggleThumbs: function (value) {
+        const closeButton = document.getElementById('book_close_btn');
+
+        // Toggle the display property
+        if (closeButton.style.display === 'none') {
+            closeButton.style.display = 'block'; // Show the closeButton
+        } else {
+            closeButton.style.display = 'none'; // Hide the closeButton
+        }
+        
         if (!this.thumbs) {
             this.createThumbs();
         }
