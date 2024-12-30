@@ -257,7 +257,7 @@ function loadAllEpisode(){
             let resArray = JSON.parse(res);
             $('#all-episode-list').html("");
             resArray.forEach(item => {
-                $('#all-episode-list').append(`<li onclick="playAudio('${currentPlayPodcastId}', '${item.audio_url}', '${item.title}', '${currentPodcastThumbnail}')">${item.title}</li>`)
+                $('#all-episode-list').append(`<li onclick="playAudio('${currentPlayPodcastId}', 'https://roshan1.b-cdn.net/${item.audio_url}', '${item.title}', '${currentPodcastThumbnail}')">${item.title}</li>`)
             });
         },
         error: function(err){
