@@ -14,20 +14,23 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-5 d-none d-lg-block" style="width: 500px;">
+            <div class="col-lg-5 d-none d-lg-block" style="width: 640px;">
                 <nav class="mainmenu__nav">
                     <ul class="meninmenu d-flex justify-content-start">
                         <li>
                             <a href="index.php" style="color: <?= $currentFileName === 'index.php' ? '#ef0029;': 'black;' ?>">Home</a>
                         </li>
                         <li>
-                            <a href="category.php" style="color: <?= $currentFileName === 'category.php' ? '#ef0029;': 'black;' ?>">E-books</a>
+                            <a href="category.php" style="color: <?= $currentFileName === 'category.php' ? '#ef0029;': 'black;' ?>"><?= $lang_data['E_books']; ?></a>
                         </li>
                         <li>
-                            <a href="podcast.php" style="color: <?= $currentFileName === 'podcast.php' ? '#ef0029;': 'black;' ?>">podcasts</a>
+                            <a href="podcast.php" style="color: <?= $currentFileName === 'podcast.php' ? '#ef0029;': 'black;' ?>"><?= $lang_data['Podcasts']; ?></a>
                         </li>
                         <li>
-                            <a href="full-width-layout.php" style="color: <?= $currentFileName === 'full-width-layout.php' ? '#ef0029;': 'black;' ?>">My E-Books</a>
+                            <a href="audio-books.php" style="color: <?= $currentFileName === 'audio-books.php' ? '#ef0029;': 'black;' ?>">Audio books</a>
+                        </li>
+                        <li>
+                            <a href="full-width-layout.php" style="color: <?= $currentFileName === 'full-width-layout.php' ? '#ef0029;': 'black;' ?>"><?= $lang_data['My_E_books']; ?></a>
                         </li>
                         <!-- <li><a href="#">Add a Book</a></li> -->
                         <!-- <li><a href="#">Profile</a></li> -->
@@ -81,16 +84,16 @@
 </header>
 <div class="dropdown-menu show p-2 dropdown-menu-style" id="language-dropdown" data-popper-placement="bottom-start">
     <ul style="padding: 20px 10px;">
-        <li class="single-list"><a href="index.php">English</a></li>
-        <li class="single-list"><a href="#">Dari</a></li>
-        <li class="single-list"><a href="#">Pashto</a></li>
+        <li class="single-list"><a href="language.php?lang_id=1">English</a></li>
+        <li class="single-list"><a href="language.php?lang_id=2">Dari</a></li>
+        <li class="single-list"><a href="language.php?lang_id=3">Pashto</a></li>
     </ul>
 </div>
 <div class="dropdown-menu show p-2 dropdown-menu-style" id="user-dropdown" data-popper-placement="bottom-start">
     <ul style="padding: 20px 10px;">
-        <li class="single-list"><a href="request-book.php">Request A Book</a></li>
-        <li class="single-list"><a href="#">My Account</a></li>
-        <li class="single-list"><a href="#">Logout</a></li>
+        <li class="single-list"><a href="request-book.php"><?= $lang_data['Request_A_Book']; ?></a></li>
+        <li class="single-list"><a href="my-account.php"><?= $lang_data['My_Account']; ?></a></li>
+        <li class="single-list"><a href="#"><?= $lang_data['Logout']; ?></a></li>
     </ul>
 </div>
 <div class="dropdown-menu show p-2 dropdown-menu-style" id="menu-dropdown" data-popper-placement="bottom-start">
