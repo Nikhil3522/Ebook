@@ -727,3 +727,12 @@ function readNowButton(bookId, lang, totalPage){
 
   window.location.href=`book_reader/examples/dark_skin.html?id=${bookId}&language=${lang}&total_page=${totalPage}`;
 }
+
+function buttonLoader(element, url){
+  element.innerHTML = "<img src='images/btn-loader.gif' alt='loader' height='20px' />";
+
+  setTimeout(() => {
+  // After 2 seconds, 
+      window.location.href = url;
+  }, 2000);
+}
