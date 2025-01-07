@@ -76,7 +76,7 @@
                                 <div class="login">
                                     <div class="account-form-container">
                                         <div class="account-login-form">
-                                            <form id="myForm" action="" method="post" onsubmit="">
+                                            <form id="myForm" action="" method="post" onsubmit="return validationform()">
                                                 <div class="my-account-form-wrap white">
                                                     <h3 class="title__be--2 mb-3" style="display: inline-block; border-bottom: 2px solid #f00028;">General <span class="color--theme">Information</span></h3>
                                                     <p>By letting us know your name, we can make our support experience much more personal.</p>
@@ -100,7 +100,9 @@
                                                 </div>
                                                 <div class="button-box mt-3">
                                                     <button 
+                                                    id="next-btn-for-loader"
                                                         type="submit"
+                                                        name="submitdet"
                                                         class="btn theme-color-four"
                                                         style="background-color: #f00028; border: none; min-width: 130px; max-width: 130px; color: white;"
                                                     >Save Changes</button>
