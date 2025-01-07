@@ -736,3 +736,16 @@ function buttonLoader(element, url){
       window.location.href = url;
   }, 2000);
 }
+
+function validationform() {
+	// Prevent form submission initially
+	document.getElementById('next-btn-for-loader').innerHTML = "<img src='images/btn-loader.gif' alt='loader' height='20px' />";
+	
+	// Set timeout to delay the form submission
+	setTimeout(() => {
+		// After 2 seconds, submit the form manually
+		document.getElementById('myForm').submit();
+	}, 2000);
+	
+	return false;  // Prevent default form submission
+}
