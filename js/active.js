@@ -617,6 +617,10 @@ function showNotification(message) {
 
 // Function to add a favorite and trigger notification
 function addFavourite(event, bookId) {
+  if(userId === null || userId === 0){
+    window.location.href= 'register.php';
+    return;
+  }
   
   // Hide the list item if the event target exists
   if (event) {
