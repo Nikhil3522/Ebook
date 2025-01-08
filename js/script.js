@@ -1,5 +1,6 @@
 function createItemHtml_grid(item) {
     var link = `single-product.php?book_id=${item.id}`;
+    // console.log(window.appData.userId);
     return `
         <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12" id="itemId-${item.id}">
             <div class="product__thumb">
@@ -12,7 +13,7 @@ function createItemHtml_grid(item) {
             </div>
             <div class="product__content content--center">
                 <h4><a href="${link}">${item.title}</a></h4>
-                ${ !item.book_id ? `
+                ${ (!item.book_id && userId !== null && userId !== 0) ? `
                 <div class="action">
                     <div class="actions_inner">
                         <ul class="add_to_links">
@@ -61,10 +62,11 @@ function createItemHTML_list(item){
                         <li><i class="fa fa-star-o"></i></li>
                     </ul>
                     <p style="text-align: justify;">${item.description}</p>
-                    <ul class="cart__action d-flex">
+                    ${ (userId !== null && userId !== 0) ?
+                    `<ul class="cart__action d-flex">
                         <li class="cart"><a href="${bookReadLink}">Read Now</a></li>
                         ${ !item.book_id ? `<li class="wishlist"><a onclick="addFavourite(event, ${item.id})"></a></li>` : `` }
-                    </ul>
+                    </ul>` : `` }
                 </div>
             </div>`;
 }
