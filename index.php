@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ebook</title>
+    <title>Roshan Elibrary</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="images/logo/logo.png">
-    <link rel="apple-touch-icon" href="images/logo/logo.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -148,7 +148,7 @@
                 <!-- End Single Tab Content -->
             </div>
             <div class="d-flex mt-3">
-                <button class="plan-btn" id="home-explore-more-btn" onclick="window.location.href='category.php'">EXPLORE MORE</button>
+                <button class="plan-btn" id="home-explore-more-btn" onclick="window.location.href='category.php'"><?= $lang_data['Explore_more']; ?></button>
             </div>
         </div>
 
@@ -201,7 +201,7 @@
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <div class="product__hover--content">
+                                <!-- <div class="product__hover--content">
                                     <ul class="rating d-flex">
                                         <li class="on"><i class="fa fa-star-o"></i></li>
                                         <li class="on"><i class="fa fa-star-o"></i></li>
@@ -209,7 +209,7 @@
                                         <li><i class="fa fa-star-o"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <?php
@@ -222,26 +222,31 @@
     </section>
     <!-- Start BEst Seller Area -->
     <!-- Start NEwsletter Area -->
+    <?php if($_SESSION["sign_up"] != 1){ ?>
     <section class="wn__newsletter__area bg-image--2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 offset-lg-5 col-md-12 col-12 ptb--150">
                     <div class="section__title text-center">
-                        <h2>Unlock Endless Stories</h2>
+                        <h2><?= $lang_data['Unlock_Endless_Stories'] ?></h2>
                     </div>
                     <div class="newsletter__block text-center">
                         <p>Subscribe now for unlimited access to books across all genres. Read anytime, anywhere. Start your journey today!</p>
-                        <form action="#">
-                            <div class="newsletter__box">
-                                <input type="number" placeholder="Enter your Mobile number">
-                                <button>Subscribe</button>
-                            </div>
-                        </form>
+                        <div style="display: flex; justify-content: space-between;">
+                            <form method="post" action="register.php" style="display: flex; margin: auto;">
+                                <p style="line-height: 60px; width: 45px; padding: 0;">+93</p>
+                                <div class="newsletter__box">
+                                    <input type="number" name="msisdn" oninput="limitLength(this)" placeholder="Enter your Mobile number">
+                                    <button><?= $lang_data['Subscribe']; ?></button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <?php } ?>
     <!-- End NEwsletter Area -->
     <!-- Best Sale Area -->
     <section class="best-seel-area pt--80 pb--60" style="background: #f6f6f6;">
@@ -388,6 +393,9 @@
 <!-- //Main wrapper -->
 
 <!-- JS Files -->
+<script>
+    const userId = <?php echo json_encode($user_id); ?>;
+</script>
 <script src="js/vendor/jquery.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
