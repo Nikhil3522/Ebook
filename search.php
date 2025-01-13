@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EBook</title>
+    <title>Roshan Elibrary</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="images/logo/logo.png">
-    <link rel="apple-touch-icon" href="images/logo/logo.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -72,11 +72,17 @@
                         $search_input = $_GET['search_key'];
                         $author_input = $_GET['author'];
                         $category_input = $_GET['category_input'];
+                        $language_input = $_GET['language_input'];
+
+                        $language_query_condition = " ";
+                        if(isset($language_input) && $language_input != NULL){
+                            $language_query_condition = " lang = '$language_input' AND ";
+                        }
 
                         if(isset($category_input)  && $category_input != NULL){
-                            $query = "SELECT * FROM ebook WHERE title LIKE '%$search_input%' AND FIND_IN_SET($category_input ,cat_id) AND ACTIVE = 1 LIMIT 12";
+                            $query = "SELECT * FROM ebook WHERE title LIKE '%$search_input%' AND $language_query_condition FIND_IN_SET($category_input ,cat_id) AND ACTIVE = 1 LIMIT 12";
                         }else{
-                            $query = "SELECT * FROM ebook WHERE title LIKE '%$search_input%' AND ACTIVE = 1 LIMIT 12";
+                            $query = "SELECT * FROM ebook WHERE title LIKE '%$search_input%' AND $language_query_condition ACTIVE = 1 LIMIT 12";
                         }
                         $result = $conn->query($query);
 
@@ -131,6 +137,12 @@
                                                     <?php
                                                 }
                                                 ?>
+                                            </select>
+                                            <select class="filter__select" name="language_input" style="height: 36px; width: 216px; border-color: darkgray;">
+                                                <option disabled selected>Language</option>
+                                                <option value="English">English</option>
+                                                <option value="Dari">Dari</option>
+                                                <option value="Pashto">Pashto</option>
                                             </select>
                                             <div class="subscribe-btn-wrap d-flex mb-3">
                                                 <button class="subscribe-btn" href="register.php" type="submit" id="load_more_button">
