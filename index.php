@@ -62,9 +62,31 @@
         width: 23%;
     }
 
+    #all-time-fav-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    #all-time-fav-container > div{
+        /* width: 12%; */
+        box-shadow: 1px 1px 5px #92000069;
+    }
+
+    #all-time-fav-container > div:hover{
+        /* width: 12%; */
+        box-shadow: 1px 1px 15px #92000069;
+    }
+
     @media only screen and (max-width: 600px) {
         #new-arrival-container > div {
             width: 45%;
+        }
+
+        #all-time-fav-container > div{
+            width: 47%;
         }
     }
 </style>
@@ -273,10 +295,10 @@
                 </div>
             </div>
         </div>
-        <div class="slider center">
+        <div id="all-time-fav-container">
 
             <?php
-                $query = "SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE ebook.active = 1 ORDER BY RAND() LIMIT 15";
+                $query = "SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE ebook.active = 1 ORDER BY RAND() LIMIT 6";
                 $result = $conn->query($query);
                 while($row = $result->fetch_assoc()){
                     $row_id = $row['id'];
