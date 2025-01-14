@@ -114,7 +114,7 @@ switch ($function_name) {
                         B.parent_id = A.id AND B.season = 1 AND B.episode = 1
                     WHERE 
                         A.parent_id = 0 AND A.active = 1 AND FIND_IN_SET(?, A.cat_id)
-                    LIMIT 9 OFFSET ?;";
+                     ORDER BY id DESC LIMIT 9 OFFSET ?;";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('ii', $category_id, $offset);
         }else{
@@ -132,7 +132,7 @@ switch ($function_name) {
                         B.parent_id = A.id AND B.season = 1 AND B.episode = 1
                     WHERE 
                         A.parent_id = 0 AND A.active = 1
-                    LIMIT 9 OFFSET ?;";
+                     ORDER BY id DESC LIMIT 9 OFFSET ?;";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('i', $offset);
         }
