@@ -45,6 +45,28 @@
     #wrapper{
         display: none;
     }
+
+    /* .owl-item{
+        width: 150px;
+    } */
+
+    #new-arrival-container{
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    #new-arrival-container > div {
+        width: 23%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        #new-arrival-container > div {
+            width: 45%;
+        }
+    }
 </style>
 
 <body>
@@ -166,10 +188,10 @@
                 </div>
             </div>
             <!-- Start Single Tab Content -->
-            <div class="furniture--4 border--round arrows_style owl-carousel owl-theme mt--50">
+            <div id="new-arrival-container">
                 
                 <?php 
-                    $query = "SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE ebook.active = 1 ORDER BY id DESC LIMIT 8";
+                    $query = "SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE ebook.active = 1 ORDER BY id DESC LIMIT 4";
                     $result = $conn->query($query);
                     while($row = $result->fetch_assoc()){
                         $row_id = $row['id'];
@@ -201,15 +223,6 @@
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <!-- <div class="product__hover--content">
-                                    <ul class="rating d-flex">
-                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                        <li class="on"><i class="fa fa-star-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div> -->
                             </div>
                         </div>
                         <?php
