@@ -126,14 +126,19 @@
     <!-- Start Slider area -->
     <div id="slider" class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
         <!-- Start Single Slide -->
-        <div class="slide  fullscreen align__center--left" style="max-height: 200px;">
-            <img src="images/banner/1.png" style="position: absolute; top: 0;"/>
-        </div>
-        <!-- End Single Slide -->
-        <!-- Start Single Slide -->
-        <div class="slide fullscreen align__center--left" style="max-height: 200px;">
-            <img src="images/banner/2.png" style="position: absolute; top: 0;"/>
-        </div>
+        <?php
+            $query = "SELECT * FROM banners WHERE active = 1";
+            $banners_result = $conn->query($query);
+            while($banner_row = $banners_result->fetch_assoc()){
+                $banner_url = $banner_row['banner_url'];
+                ?>
+                <div class="slide  fullscreen align__center--left" style="max-height: 200px;">
+                    <img src="<?= $banner_url; ?>" style="position: absolute; top: 0;"/>
+                </div>
+                <?php
+            }
+
+        ?>
         <!-- End Single Slide -->
     </div>
     <!-- End Slider area -->
