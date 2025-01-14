@@ -3,10 +3,46 @@
 // error_reporting(E_ALL);
 
 include('cons.php');
-$function_name = $_GET['function_name'];
-$user_id = 1;
+$function_name = $_GET['function_name'] ? $_GET['function_name'] : $_GET['func'];
+
+
+if($_SESSION['user_id']){
+    $user_id = $_SESSION['user_id'];
+}
+
+// $user_id = 1;
+
 
 switch ($function_name) {
+    case 'ADD_USER':
+
+        $msisdn = $_GET['msisdn'];
+
+        $query = "SELECT * from user where msisdn = '$msisdn'";
+        $result = $conn->query($query);
+
+        if($result->num_rows > 0){
+
+            $user_data = $result->fetch_assoc();
+            $_SESSION['user_id'] = $user_data['id'];
+
+        }else{
+            $query = "INSERT INTO user (msisdn) VALUES ('$msisdn')";
+            $insert_data = $conn->query($query);
+
+            if ($insert_data) {
+                // Get the auto-incremented ID of the newly inserted row
+                $new_id = $conn->insert_id;
+                $_SESSION["user_id"] = $new_id;
+                setcookie('user_id', $new_id, time() + (60*60*24*365),'/');
+            } else {
+                // Handle the error if the query fails
+                echo "Error in query: " . $conn->error;
+            }
+        }
+        
+        header('Location: index.php');
+        break;
     case 'load_ebook':
         $offset = intval($_GET['offset']); // Ensure offset is an integer
         $language = $_GET['language'];
@@ -37,7 +73,6 @@ switch ($function_name) {
         break;
     case 'add_favourite':
         $book_id = $_GET['book_id'];
-        $user_id = 1;
 
         $query = "INSERT INTO favourite(user_id, book_id) VALUE('$user_id', '$book_id');";
         $conn->query($query);
@@ -46,7 +81,6 @@ switch ($function_name) {
         break;
     case 'remove_favourite':
         $book_id = $_GET['book_id'];
-        $user_id = 1;
 
         $query = "DELETE FROM favourite WHERE book_id = $book_id AND user_id = $user_id LIMIT 1";
         $conn->query($query);
