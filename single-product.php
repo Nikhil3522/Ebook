@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EBook</title>
+    <title>Roshan Elibrary</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="images/logo/logo.png">
-    <link rel="apple-touch-icon" href="images/logo/logo.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -47,6 +47,12 @@
     <?php 
     include('navbar.php');
     include('cons.php');
+    if($user_id == 0){
+        echo '<script type="text/javascript">
+                window.location.href = "register.php";
+            </script>';
+        exit();
+    }
     ?>
     <!-- Start Search Popup -->
     <div class="box-search-content search_active block-bg close__top">
@@ -114,7 +120,7 @@
                                     <div class="box-tocart d-flex">
                                         <div class="addtocart__actions">
                                             <button class="tocart" onclick="readNowButton('<?= $book_id ?>', '<?= $lang ?>', '<?= $total_page ?>')" type="submit" title="Read this book">
-                                                Read Now
+                                                <?= $lang_data['Read_Now']; ?>
                                             </button>
                                         </div>
                                         <?php
@@ -130,7 +136,7 @@
                                     </div>
                                     <div class="product-share">
                                         <ul>
-                                            <li class="categories-title">Share :</li>
+                                            <li class="categories-title"><?= $lang_data['Share']; ?> :</li>
                                             <li>
                                                 <a href="#">
                                                     <i class="icon-social-twitter icons"></i>
@@ -160,7 +166,7 @@
                     <div class="product__info__detailed">
                         <div class="pro_details_nav nav justify-content-start" role="tablist">
                             <!-- <a class="nav-item nav-link " data-bs-toggle="tab" href="#nav-details" role="tab">Details</a> -->
-                            <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-review" role="tab">Your Review</a>
+                            <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-review" role="tab"><?= $lang_data['Your_Review'] ?></a>
                         </div>
                         <div class="tab__container tab-content">
                             <!-- Start Single Tab Content -->
@@ -169,7 +175,7 @@
                                     <div class="review-field-ratings">
                                         <div class="product-review-table">
                                             <div class="review-field-rating d-flex">
-                                                <span>Rate</span>
+                                                <span><?= $lang_data['Rate'] ?></span>
                                                 <ul class="rating d-flex">
                                                     <li class="off"><i class="zmdi zmdi-star"></i></li>
                                                     <li class="off"><i class="zmdi zmdi-star"></i></li>
@@ -182,11 +188,11 @@
                                     </div>
                                     <div class="review_form_field">
                                         <div class="input__box">
-                                            <span>Review</span>
+                                            <span><?= $lang_data['Review'] ?></span>
                                             <textarea name="review" style="padding: 5px;"></textarea>
                                         </div>
                                         <div class="review-form-actions">
-                                            <button>Submit Review</button>
+                                            <button><?= $lang_data['Submit_Review'] ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +202,7 @@
                     </div>
                     <div class="wn__related__product pt--80 pb--50">
                         <div class="section__title text-center">
-                            <h2 class="title__be--2">Similar Books</h2>
+                            <h2 class="title__be--2"><?= $lang_data['Similar_Books'] ?></h2>
                         </div>
                         <div class="row mt--60">
                             <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
@@ -208,19 +214,20 @@
                                         $title = $row['title'];
                                         $thumbnail1 = $row['thumbnail1'];
                                         $thumbnail2 = $row['thumbnail2'];
+                                        $book_link = "single-product.php?book_id=".$row['id'];
 
                                 ?>
                                 <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="product__thumb" style="backegroud: red; padding: 5px;">
-                                        <a class="first__img" href="single-product.php">
+                                        <a class="first__img" href="<?= $book_link; ?>">
                                             <img src="https://roshan1.b-cdn.net/<?php echo $thumbnail1; ?>" alt="<?php echo $title; ?> image">
                                         </a>
-                                        <a class="second__img animation1" href="single-product.php">
+                                        <a class="second__img animation1" href="<?= $book_link; ?>">
                                             <img src="https://roshan1.b-cdn.net/<?php echo $thumbnail2; ?>" alt="<?php echo $title; ?> image">
                                         </a>
                                     </div>
                                     <div class="product__content content--center">
-                                        <h4><a href="single-product.php"><?php echo $title; ?></a></h4>
+                                        <h4><a href="<?= $book_link; ?>"><?php echo $title; ?></a></h4>
                                         <div class="product__hover--content">
                                             <ul class="rating d-flex">
                                                 <li class="on"><i class="fa fa-star-o"></i></li>
@@ -239,7 +246,7 @@
                     </div>
                     <div class="wn__related__product">
                         <div class="section__title text-center">
-                            <h2 class="title__be--2">NEW ARRIVALS</h2>
+                            <h2 class="title__be--2"><?= $lang_data['New_Arrivals'] ?></h2>
                         </div>
                         <div class="row mt--60">
                             <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
@@ -251,19 +258,20 @@
                                         $title = $row['title'];
                                         $thumbnail1 = $row['thumbnail1'];
                                         $thumbnail2 = $row['thumbnail2'];
+                                        $book_link = "single-product.php?book_id=".$row['id'];
 
                                 ?>
                                 <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="product__thumb">
-                                        <a class="first__img" href="single-product.php">
+                                        <a class="first__img" href="<?= $book_link ?>">
                                             <img src="https://roshan1.b-cdn.net/<?php echo $thumbnail1; ?>" alt="product image">
                                         </a>
-                                        <a class="second__img animation1" href="single-product.php">
+                                        <a class="second__img animation1" href="<?= $book_link ?>">
                                             <img src="https://roshan1.b-cdn.net/<?php echo $thumbnail2; ?>" alt="product image">
                                         </a>
                                     </div>
                                     <div class="product__content content--center">
-                                        <h4><a href="single-product.php"><?php echo $title; ?></a></h4>
+                                        <h4><a href="<?= $book_link ?>"><?php echo $title; ?></a></h4>
                                         <div class="product__hover--content">
                                             <ul class="rating d-flex mt-[-35px]">
                                                 <li class="on"><i class="fa fa-star-o"></i></li>
@@ -396,6 +404,9 @@
 
 
 <!-- JS Files -->
+<script>
+    const userId = <?php echo json_encode($user_id); ?>;
+</script>
 <script src="js/vendor/jquery.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
