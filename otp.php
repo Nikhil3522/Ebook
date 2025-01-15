@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -6,13 +7,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ebook</title>
+    <title>Roshan Elibrary</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="images/logo/logo.png">
-    <link rel="apple-touch-icon" href="images/logo/logo.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -34,6 +35,16 @@
     <!-- Modernizer js -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
 </head>
+<style>
+    #resend-otp-btn{
+        border: none;
+        background: transparent;
+        color: #0248b7;
+        text-decoration: underline;
+        font-size: 13px;
+        font-weight: 600;
+    }
+</style>
 
 <body>
 
@@ -52,17 +63,26 @@
                     <h3 class="text-center m-2">OTP Verification</h3>
                     <h4 class="text-center m-2" style="font-weight: normal;">Please enter the OTP sent on your mobile number</h4>
 
-                    <div class="login-form-container d-flex">
-                        <form class="mx-auto" action="pricing-plan.php">
+                    <div class="login-form-container d-flex flex-column">
+                        <form class="mx-auto" action="" method="post" id="myForm" style="display: flex; flex-direction: column;">
                             <div class="login-input-box d-flex">
-                                <input type="text" name="msisdn" id="msisdn" maxlength="4" style="padding: 10px 0px;" required="">
+                                <input type="text" name="otp" id="otp" oninput="limitLengthAndNumbers(this)" maxlength="4" pattern="\d*" inputmode="numeric" style="padding: 10px; border: 1px solid;" placeholder="Enter OTP" required="">
                             </div>
-                            <div class="button-box" style="display: flex; margin-top: 15px;">
+                            <div class="button-box" style="display: flex; margin: auto; margin-top: 15px;">
                                 <button class="register-btn btn" type="submit">
                                     <span id="next-btn-for-loader">NEXT</span>
                                 </button>
                             </div>
                         </form>
+
+                        <button 
+                            class="m-auto mt-3"
+                            id="resend-otp-btn"
+                            onclick="resendOTP()"
+                        >
+                            Resend OTP <span id="count-down-full">in 0:<span id="otp-count-down">30</span></span>
+                        </button>
+                            
                     </div>
                 </div>
             </div>
@@ -81,6 +101,59 @@
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/active.js"></script>
+<script>
+var time_limit = 30; //30 second
+var otpCountDown = document.getElementById('otp-count-down');
+var countdownFull = document.getElementById('count-down-full');
+var timeInterval = null;
+
+function resendOtpCountdown(){
+    timeInterval = setInterval(() => {
+
+        if(time_limit === 0){
+            clearInterval(timeInterval);
+            countdownFull.style.display = 'none';
+        }
+
+        if(time_limit < 10){
+            otpCountDown.innerText = `0${time_limit--}`;
+        }else{
+            otpCountDown.innerText = time_limit--;
+        }
+    }, 1000);
+}
+
+function resendOTP(){
+    if(time_limit > 0){
+        return;
+    }
+
+    // Create a form dynamically
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'register.php';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'msisdn';
+    input.value = '<?php echo $_SESSION['MSISDN'] ?>';
+    form.appendChild(input);
+
+    // Append form to the body and submit
+    document.body.appendChild(form);
+    form.submit();
+}
+
+resendOtpCountdown();
+
+function isNumber(event) {
+    var charCode = event.which ? event.which : event.keyCode;
+    if (charCode < 48 || charCode > 57) {
+        return false;
+    }
+    return true;
+}
+</script>
 
 </body>
 
