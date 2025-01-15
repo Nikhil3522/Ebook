@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EBook</title>
+    <title>Roshan Elibrary</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="images/logo/logo.png">
-    <link rel="apple-touch-icon" href="images/logo/logo.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -468,6 +468,21 @@
         document.getElementById('loader').style.display = 'none';
         document.getElementById('wrapper').style.display = 'block';
     })
+
+    const userId = <?php echo json_encode($user_id); ?>;
+
+    <?php if(isset($_GET['audiobook_id'])){ ?>
+            console.log("call audio");
+            document.addEventListener("DOMContentLoaded", function() {
+                playAudio(
+                    '<?= $_GET['audiobook_id'] ?>',
+                    'https://roshan1.b-cdn.net/<?= $_GET['audio_url'] ?>',
+                    '<?= $_GET['title'] ?>',
+                    'https://roshan1.b-cdn.net/<?= $_GET['thumbnail'] ?>',
+                    true
+                );
+            });
+    <?php } ?>
 </script>
 <script src="js/vendor/jquery.min.js"></script>
 <script src="js/popper.min.js"></script>

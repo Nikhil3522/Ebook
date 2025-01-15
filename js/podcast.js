@@ -134,7 +134,11 @@ function updatePlayPauseButton() {
 
 let offset = 0;
 
-function playAudio(podcastId, audioUrl, songTitle, thumbnail) {
+function playAudio(podcastId, audioUrl, songTitle, thumbnail, redirectPlay = false) {
+    if(userId === null || userId === 0){
+        window.location.href='register.php';
+        return;
+    }
 
     if ($('#footer-music-player').is(':hidden')) {
         $('#footer-music-player').slideDown('slow');
@@ -154,8 +158,10 @@ function playAudio(podcastId, audioUrl, songTitle, thumbnail) {
     // Update the displayed song title
     songTitleDisplay.textContent = songTitle;
 
-    // Play the audio
-    audioPlayer.play();
+    if(redirectPlay === false){
+        // Play the audio
+        audioPlayer.play();
+    }
 
     currentPlayPodcastId = podcastId;
     currentPodcastThumbnail = thumbnail;
@@ -189,7 +195,7 @@ function createItemHtml_grid(item, pageType) {
                 </a>
             </div>
             <div class="content--center">
-                <h4 style="font-size: 16px; padding: 10px 2px; font-weight: 500;"><a href="${link}">${item.title}</a></h4>
+                <h4 style="font-size: 16px; padding: 10px 2px; font-weight: bold;"><a href="${link}">${item.title}</a></h4>
             </div>
         </div>
     `;
@@ -247,6 +253,21 @@ function loadPodcast() {
 loadPodcast();
 $('#load_more_button').on('click', loadPodcast);
 
+// Select the button
+const load_more_button = document.getElementById('load_more_button');
+
+// Create an IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+        loadPodcast();
+    }
+  });
+});
+
+// Start observing the button
+observer.observe(load_more_button);
+
 
 function loadAllEpisode(){
     $.ajax({
@@ -257,7 +278,8 @@ function loadAllEpisode(){
             let resArray = JSON.parse(res);
             $('#all-episode-list').html("");
             resArray.forEach(item => {
-                $('#all-episode-list').append(`<li onclick="playAudio('${currentPlayPodcastId}', 'https://roshan1.b-cdn.net/${item.audio_url}', '${item.title}', '${currentPodcastThumbnail}')">${item.title}</li>`)
+                let item_audio_url = filename === 'podcast.php' ? item.audio_url : `https://roshan1.b-cdn.net/${item.audio_url}`;
+                $('#all-episode-list').append(`<li onclick="playAudio('${currentPlayPodcastId}', '${item_audio_url}', '${item.title}', '${currentPodcastThumbnail}')">${item.title}</li>`)
             });
         },
         error: function(err){
