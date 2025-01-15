@@ -80,6 +80,23 @@
         box-shadow: 1px 1px 15px #92000069;
     }
 
+    .home-audio-play-btn{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ffffff82;
+        height: 80px;
+        width: 80px;
+        text-align: center;
+        border-radius: 50%;
+        box-shadow: 0px 0px 3px gray;
+    }
+
+    .home-audio-play-btn:hover{
+        background: white;
+    }
+
     @media only screen and (max-width: 600px) {
         #new-arrival-container > div {
             width: 45%;
@@ -203,6 +220,60 @@
 
     </section>
     <!-- Start BEst Seller Area -->
+    <!-- New Audiobook Section -->
+    <section class="best-seel-area pt--80 pb--60" style="background: #f6f6f6;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section__title text-center pb--50">
+                        <h2 class="title__be--2">Discover the Newest <span class="color--theme">Audiobook</span></h2>
+                        <!-- <p>Explore timeless classics and the latest trending titles, handpicked for every reader.</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="all-time-fav-container">
+
+            <?php
+                // $query = "SELECT ebook.*, favourite.book_id FROM ebook LEFT JOIN favourite ON ebook.id = favourite.book_id  AND favourite.user_id = $user_id WHERE ebook.active = 1 ORDER BY RAND() LIMIT 6";
+                $query = "SELECT 
+                        A.id, A.title, A.description, A.thumbnail, B.audio_url
+                    FROM 
+                        audiobook.audiobook AS A
+                    LEFT JOIN 
+                        audiobook.audiobook AS B 
+                    ON 
+                        B.parent_id = A.id AND B.season = 1 AND B.episode = 1
+                    WHERE 
+                        A.parent_id = 0 AND A.active = 1
+                    ORDER BY id DESC LIMIT 6" ;
+                $result = $conn->query($query);
+                while($row = $result->fetch_assoc()){
+                    $row_id = $row['id'];
+                    $title = $row['title'];
+                    $thumbnail = $row['thumbnail'];
+                    $audio_url = $row['audio_url'];
+                    $link = "audio-books.php?audiobook_id=$row_id&title=$title&thumbnail=$thumbnail&audio_url=$audio_url";
+            ?>
+                <!-- Single product start -->
+                <div class="product product__style--3">
+                    <div class="product__thumb">
+                        <a class="first__img" href="<?= $link ?>">
+                            <img src="https://roshan1.b-cdn.net/<?= $thumbnail; ?>" alt="product image" height="250px">
+                        </a>
+                        <p style="text-align: center; font-weight: 600; margin-top:5px;"><?= $title; ?></p>
+                    </div>
+                    <div class="home-audio-play-btn">
+                        <a class="compare" href="<?= $link ?>" style="font-size: 40px; width: 80px; height: 80px; line-height: 80px;">
+                            <i class="fa-solid fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Single product end -->
+            <?php } ?>
+        </div>
+    </section>
+    <!-- End New Audiobook Section -->
      <!-- Start BEst Seller Area -->
     <section class="wn__product__area brown--color pt--80  pb--30" style="background: #f6f6f6;">
         <div class="container">
@@ -238,7 +309,7 @@
                                 </a>
                             </div>
                             <div class="product__content content--center">
-                                <h4><a href="<?= $link ?>"><?= $title ?></a></h4>
+                                <h4><a href="<?= $link ?>" class="fw-bold"><?= $title ?></a></h4>
                                 <?php if(!$book_id){?>
                                     <div class="action">
                                         <div class="actions_inner">
@@ -276,7 +347,7 @@
                             <form method="post" action="register.php" style="display: flex; margin: auto;">
                                 <p style="line-height: 60px; width: 45px; padding: 0;">+93</p>
                                 <div class="newsletter__box">
-                                    <input type="number" name="msisdn" oninput="limitLength(this)" placeholder="Enter your Mobile number">
+                                    <input type="text" name="msisdn" oninput="limitLengthAndNumbers(this)" maxlength="9" pattern="\d*" inputmode="numeric"  placeholder="Enter your Mobile number">
                                     <button><?= $lang_data['Subscribe']; ?></button>
                                 </div>
                             </form>
