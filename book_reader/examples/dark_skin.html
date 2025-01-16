@@ -6,6 +6,16 @@
     <link rel="stylesheet" type="text/css" href="../src/css/flipbook.css" />
     <script src="../src/js/flipbook.js"></script>
     <script type="text/javascript">
+
+        fetch('https://elibrary.roshan.af/api.php?func=CHECK_USER')
+            .then(response => response.json()) // Parse JSON response
+            .then(data => {
+                if (data.status === false) {
+                    window.location.href = 'https://elibrary.roshan.af/logout.php';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        
         const urlParams = new URLSearchParams(window.location.search);
         const bookLanguage = urlParams.get('language');
         const bookId = urlParams.get('id');
