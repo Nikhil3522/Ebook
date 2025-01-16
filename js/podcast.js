@@ -136,13 +136,14 @@ let offset = 0;
 
 function playAudio(podcastId, audioUrl, songTitle, thumbnail, redirectPlay = false) {
     if(userId === null || userId === 0){
-        window.location.href='register.php';
+        window.location.href='logout.php';
         return;
     }
 
     if ($('#footer-music-player').is(':hidden')) {
         $('#footer-music-player').slideDown('slow');
         $('#show-all-epi-btn').slideDown('slow');
+        $('#show-detail').slideDown('slow');
     }
 
     songs.push({ title: songTitle, url: audioUrl, thumbnail: thumbnail });
@@ -286,10 +287,36 @@ function loadAllEpisode(){
         console.log("Error in loading all episode of a podcast: ",err);
         }
     });
+    loadDescription();
 }
 
 function showEpisodeList(){
     $('#show-all-epi-btn').slideToggle("fast");
     loadAllEpisode();
     $('#all-epi-container').slideToggle("fast");
+}
+
+function showDetails(){
+    $('#show-detail').slideToggle("fast");
+    loadDescription();
+    $('#details-container').slideToggle("fast");
+}
+
+function loadDescription(){
+    $.ajax({
+        method: 'GET',
+        url: 'api.php',
+        data: { function_name: 'load_audio_description', podcast_parent_id : currentPlayPodcastId},
+        success: function (res){
+            let resArray = JSON.parse(res);
+            let description = resArray[0].description;
+            let lang = resArray[0].lang;
+
+            $('#details-description').text(description);
+            $('#details-lang').text(lang);
+        },
+        error: function(err){
+        console.log("Error in loading all episode of a podcast: ",err);
+        }
+    });
 }

@@ -171,7 +171,7 @@
     background-color: #6ec3e8;
 }
 
-#show-all-epi-btn{
+#show-all-epi-btn, #show-detail{
     display: none;
     background: #363c43;
     min-height: 40px;
@@ -188,7 +188,13 @@
     border-top-right-radius: 15px;
 }
 
-#all-epi-container{
+#show-detail{
+    margin-left: 260px;
+    min-width: 125px;
+    max-width: 125px;
+}
+
+#all-epi-container, #details-container{
     display: none;
     background: #363c43;
     min-height: 100px;
@@ -208,7 +214,12 @@
     -ms-overflow-style: none; /* IE and Edge */
 }
 
-#all-epi-container::-webkit-scrollbar {
+#details-container{
+    color: white;
+    max-width: 200px;
+}
+
+#all-epi-container::-webkit-scrollbar, #details-container {
     display: none; /* Chrome, Safari, Edge */
 }
 
@@ -232,43 +243,43 @@
         width: 49%;
     }
 
-#footer-artist-name{
-    display:none;
-}
+    #footer-artist-name{
+        display:none;
+    }
 
-#footer-music-player .lyrics-button{
-    display:none;
-}
+    #footer-music-player .lyrics-button{
+        display:none;
+    }
 
-#footer-music-player .download-button{
-    font-size:0.9rem;
-    padding:0.4em;
-}
+    #footer-music-player .download-button{
+        font-size:0.9rem;
+        padding:0.4em;
+    }
 
-#footer-music-player .time-display{
-    display:none;
-}
+    #footer-music-player .time-display{
+        display:none;
+    }
 
-#footer-music-player .player-container{
-    padding:5px;
-}
+    #footer-music-player .player-container{
+        padding:5px;
+    }
 
-#footer-music-player .play-pause-button{
-    width:25px;
-    height:25px;
-}
-#footer-music-player .play-pause-button svg{
-    width:15px;
-    height:15px;
-}
+    #footer-music-player .play-pause-button{
+        width:25px;
+        height:25px;
+    }
+    #footer-music-player .play-pause-button svg{
+        width:15px;
+        height:15px;
+    }
 
-#footer-music-player .progress-bar{
-    margin-top:5px;
-}
+    #footer-music-player .progress-bar{
+        margin-top:5px;
+    }
 
-#footer-music-player .song-info{
-    margin-left:10px;
-}
+    #footer-music-player .song-info{
+        margin-left:10px;
+    }
   }
 </style>
 
@@ -304,9 +315,16 @@
     </div>
     <!-- End Search Popup -->
     <button onclick="showEpisodeList()" id="show-all-epi-btn">Show All Episodes</button>
+    <button onclick="showDetails()" id="show-detail">Show Details</button>
     <div id="all-epi-container">
         <h5 style="text-align: center; color: white; font-size: 14px; margin-bottom: 10px;" onclick="showEpisodeList()">All Episodes <img src="images/icons/down-arrow.png" alt="down-arrow" width="20px"/></h5>
         <ol style="color: white;" id="all-episode-list"></ol>
+    </div>
+    <div id="details-container">
+        <h5 style="text-align: center; color: white; font-size: 14px; margin-bottom: 10px;" onclick="showDetails()">Close <img src="images/icons/down-arrow.png" alt="down-arrow" width="20px"/></h5>
+        <p>Description: <br><span id="details-description"></span></p>
+        <hr></hr>
+        <p>Language: <span id="details-lang"></span></p>
     </div>
     <div id="footer-music-player">
         <div class="player-container">
