@@ -14,6 +14,22 @@ if($_SESSION['user_id']){
 
 
 switch ($function_name) {
+    case 'CHECK_USER':
+        header('Content-Type: application/json'); // Set response type to JSON
+    
+        if (isset($_SESSION["sign_up"]) && $_SESSION["sign_up"] == 1 && $user_id !== 0) {
+            echo json_encode([
+                'status' => true,
+                'message' => "User exists",
+                'user_id' => $user_id
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => "User not exists"
+            ]);
+        }
+        break;
     case 'ADD_USER':
 
         $msisdn = $_GET['msisdn'];
@@ -183,6 +199,20 @@ switch ($function_name) {
         $data = $result->fetch_all(MYSQLI_ASSOC);
         
         echo json_encode($data);
+        break;
+
+    case 'load_audio_description':
+        $podcast_parent_id = $_GET['podcast_parent_id'];
+
+        $stmt = $conn->prepare("SELECT description, lang FROM audiobook.audiobook WHERE id = ?");
+        $stmt->bind_param('i', $podcast_parent_id);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        
+        echo json_encode($data);
+        break;
     default:
         # code...
         break;
