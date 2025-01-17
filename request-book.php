@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ebook</title>
+    <title>Roshan Elibrary</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="images/logo/logo.png">
-    <link rel="apple-touch-icon" href="images/logo/logo.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -44,6 +44,12 @@
     <?php 
         include('navbar.php');
         include('cons.php');
+        if($user_id == 0){
+            echo '<script type="text/javascript">
+                    window.location.href = "logout.php";
+                </script>';
+            exit();
+        }
     ?>
     <!-- Start Search Popup -->
     <div class="box-search-content search_active block-bg close__top is-visible">
@@ -100,7 +106,7 @@
 <!-- //Main wrapper -->
 
 <!-- JS Files -->
-<script src="js/vendor/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/plugins.js"></script>
