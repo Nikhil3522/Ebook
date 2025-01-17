@@ -44,6 +44,20 @@
         font-size: 13px;
         font-weight: 600;
     }
+
+    @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0.1; }
+    }
+
+    #otp-limit-msg {
+        color: red;
+        font-size: 13px;
+        text-align: center;
+        margin-top: 3px;
+        animation: blink 1s ease-in-out 2; /* 1 second duration, blinks 3 times */
+    }
+
 </style>
 
 <body>
@@ -54,6 +68,12 @@
     <?php 
         include('navbar.php');
         include('cons.php');
+        if(!isset($_SESSION['MSISDN'])){
+            header("location:register.php");die;
+        }
+        if((isset($_SESSION["sign_up"]) && $_SESSION["sign_up"] != 0) && $user_id != 0){
+            header("location:index.php");die;
+        }
     ?>
     <!-- //Header -->
     <section>
@@ -68,6 +88,10 @@
                             <div class="login-input-box d-flex">
                                 <input type="text" name="otp" id="otp" oninput="limitLengthAndNumbers(this)" maxlength="4" pattern="\d*" inputmode="numeric" style="padding: 10px; border: 1px solid;" placeholder="Enter OTP" required="">
                             </div>
+                            <?php if($Wrong_otp_limit_data || $alert_msg){
+                                    echo "<p id='otp-limit-msg'>Wrong OTP. ". (5 - $Wrong_otp_limit_data['wrong_otp_count']) ." attempt remaining.</p>";
+                                }
+                            ?>
                             <div class="button-box" style="display: flex; margin: auto; margin-top: 15px;">
                                 <button class="register-btn btn" type="submit">
                                     <span id="next-btn-for-loader">NEXT</span>
@@ -96,7 +120,7 @@
 <!-- //Main wrapper -->
 
 <!-- JS Files -->
-<script src="js/vendor/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/plugins.js"></script>
